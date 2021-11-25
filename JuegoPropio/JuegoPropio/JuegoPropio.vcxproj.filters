@@ -36,14 +36,29 @@
     <ClCompile Include="Layer.cpp">
       <Filter>Archivos de origen\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="GameLayer.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Archivos de origen\Actores</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Archivos de origen\Actores</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Archivos de origen\Actores</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLayer.cpp">
+      <Filter>Archivos de origen\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="Hielo.cpp">
+      <Filter>Archivos de origen\Actores</Filter>
+    </ClCompile>
+    <ClCompile Include="Gota.cpp">
+      <Filter>Archivos de origen\Actores</Filter>
+    </ClCompile>
+    <ClCompile Include="Nube.cpp">
+      <Filter>Archivos de origen\Actores</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,14 +68,29 @@
     <ClInclude Include="Layer.h">
       <Filter>Archivos de encabezado\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="GameLayer.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Archivos de encabezado\Actores</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Archivos de encabezado\Actores</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Archivos de encabezado\Actores</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLayer.h">
+      <Filter>Archivos de encabezado\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="Gota.h">
+      <Filter>Archivos de encabezado\Actores</Filter>
+    </ClInclude>
+    <ClInclude Include="Hielo.h">
+      <Filter>Archivos de encabezado\Actores</Filter>
+    </ClInclude>
+    <ClInclude Include="Nube.h">
+      <Filter>Archivos de encabezado\Actores</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

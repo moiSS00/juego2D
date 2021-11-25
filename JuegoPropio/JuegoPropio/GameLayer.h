@@ -2,7 +2,10 @@
 
 #include "Layer.h"
 
+#include "Enemy.h"
 #include "Background.h"
+
+#include <list>
 
 class GameLayer : public Layer
 {
@@ -14,5 +17,6 @@ public:
 	void draw() override;
 
 	Background* background;
+	list<Enemy*> enemies;
 };
 

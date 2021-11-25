@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Game.h"
+#include "Animation.h" 
 
 class Actor
 {
@@ -17,5 +18,9 @@ public:
 	int fileWidth;
 	int fileHeight;
 	Game* game; // referencia al juego
+
+	Animation* aMoving;
+	Animation* animation; // Referencia a la animación mostrada
+
 };
 
