@@ -7,6 +7,7 @@ GameLayer::GameLayer(Game* game)
 }
 
 void GameLayer::init() {
+	background = new Background("res/fondo.png", WIDTH * 0.5, HEIGHT * 0.5, game);
 }
 
 void GameLayer::processControls() {
@@ -17,6 +18,7 @@ void GameLayer::update() {
 }
 
 void GameLayer::draw() {
+	background->draw();
 	SDL_RenderPresent(game->renderer); // Renderiza
 }
 
