@@ -51,8 +51,8 @@ void GameLayer::loadMap(string name) {
 			for (int j = 0; !streamLine.eof(); j++) {
 				streamLine >> character; // Leer character 
 				cout << character;
-				float x = 43 / 2 + j * 43; // x central
-				float y = 38.25 + i * 38.25; // y suelo
+				float x = 50 / 2 + j * 50; // x central
+				float y = 46 + i * 46; // y suelo
 				loadMapObject(character, x, y);
 			}
 

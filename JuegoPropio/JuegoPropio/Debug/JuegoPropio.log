@@ -1,4 +1,0 @@
-﻿  GameLayer.cpp
-C:\Git\juego2D\JuegoPropio\JuegoPropio\GameLayer.cpp(54,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Git\juego2D\JuegoPropio\JuegoPropio\GameLayer.cpp(55,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-  JuegoPropio.vcxproj -> C:\Git\juego2D\JuegoPropio\Debug\JuegoPropio.exe
