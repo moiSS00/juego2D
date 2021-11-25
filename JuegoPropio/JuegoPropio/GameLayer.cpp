@@ -20,6 +20,9 @@ void GameLayer::processControls() {
 }
 
 void GameLayer::update() {
+	for (auto const& enemy : enemies) {
+		enemy->update();
+	}
 	cout << "update GameLayer" << endl;
 }
 
@@ -48,8 +51,8 @@ void GameLayer::loadMap(string name) {
 			for (int j = 0; !streamLine.eof(); j++) {
 				streamLine >> character; // Leer character 
 				cout << character;
-				float x = 40 / 2 + j * 40; // x central
-				float y = 32 + i * 32; // y suelo
+				float x = 50 / 2 + j * 50; // x central
+				float y = 42 + i * 42; // y suelo
 				loadMapObject(character, x, y);
 			}
 
@@ -64,22 +67,16 @@ void GameLayer::loadMapObject(char character, float x, float y)
 	switch (character) {
 	case 'G': {
 		Enemy* enemie = new Gota(x, y, game);
-		// modificación para empezar a contar desde el suelo.
-		enemie->y = enemie->y - enemie->height / 2;
 		enemies.push_back(enemie);
 		break;
 	}
 	case 'H': {
 		Enemy* enemie = new Hielo(x, y, game);
-		// modificación para empezar a contar desde el suelo.
-		enemie->y = enemie->y - enemie->height / 2;
 		enemies.push_back(enemie);
 		break;
 	}
 	case 'N': {
 		Enemy* enemie = new Nube(x, y, game);
-		// modificación para empezar a contar desde el suelo.
-		enemie->y = enemie->y - enemie->height / 2;
 		enemies.push_back(enemie);
 		break;
 	}
