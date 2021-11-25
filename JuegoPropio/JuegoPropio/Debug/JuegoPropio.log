@@ -1,4 +1,8 @@
-﻿  Nube.cpp
+﻿  GameLayer.cpp
+C:\Git\juego2D\JuegoPropio\JuegoPropio\GameLayer.cpp(51,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Git\juego2D\JuegoPropio\JuegoPropio\GameLayer.cpp(52,13): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+  Nube.cpp
 C:\Git\juego2D\JuegoPropio\JuegoPropio\Nube.cpp(6,55): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
 C:\Git\juego2D\JuegoPropio\JuegoPropio\Nube.cpp(6,48): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Generando código...
   JuegoPropio.vcxproj -> C:\Git\juego2D\JuegoPropio\Debug\JuegoPropio.exe

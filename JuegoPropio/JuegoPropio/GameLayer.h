@@ -6,6 +6,8 @@
 #include "Background.h"
 
 #include <list>
+#include <fstream> // Leer ficheros
+#include <sstream> // Leer líneas / String
 
 class GameLayer : public Layer
 {
@@ -18,5 +20,10 @@ public:
 
 	Background* background;
 	list<Enemy*> enemies;
+
+	void loadMap(string name);
+	void loadMapObject(char character, float x, float y);
+	int mapWidth;
+
 };
 
