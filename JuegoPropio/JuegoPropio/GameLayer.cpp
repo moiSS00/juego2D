@@ -23,8 +23,12 @@ void GameLayer::update() {
 		enemy->update();
 	}
 
-	for (auto const& zombie : zombies) {
-		zombie->update();
+	map<int, list<Zombie*>>::iterator it;
+	for (it = zombies.begin(); it != zombies.end(); it++)
+	{
+		for (auto const& zombie : it->second) {
+			zombie->update();
+		}
 	}
 
 	cout << "update GameLayer" << endl;
@@ -38,9 +42,15 @@ void GameLayer::draw() {
 	for (auto const& plataforma : plataformas) {
 		plataforma->draw();
 	}
-	for (auto const& zombie : zombies) {
-		zombie->draw();
+	
+	map<int, list<Zombie*>>::iterator it;
+	for (it = zombies.begin(); it != zombies.end(); it++)
+	{
+		for (auto const& zombie : it->second) {
+			zombie->draw();
+		}
 	}
+
 	SDL_RenderPresent(game->renderer); // Renderiza
 }
 
@@ -56,7 +66,7 @@ void GameLayer::processControls() {
 	for (auto const& plataforma : plataformas) {
 		if (plataforma->clicked) {
 			Zombie* zombie = new Zombie(plataforma->x, plataforma->y - 20, game);
-			zombies.push_back(zombie);
+			zombies[zombie->y].push_back(zombie);
 			plataforma->clicked = false;
 		}
 	}
@@ -134,7 +144,7 @@ void GameLayer::loadMapObject(char character, float x, float y)
 		break;
 	}
 	case 'Z': {
-		Plataforma* plataforma = new Plataforma(x, y + 10, game);
+		Actor* plataforma = new Actor("res/plataforma.png", x, y + 10, 32, 40, game); 
 		plataformas.push_back(plataforma);
 		break;
 	}

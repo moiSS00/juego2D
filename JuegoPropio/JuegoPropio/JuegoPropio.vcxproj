@@ -162,7 +162,6 @@
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Nube.cpp" />
-    <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +175,6 @@
     <ClInclude Include="Hielo.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Nube.h" />
-    <ClInclude Include="Plataforma.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

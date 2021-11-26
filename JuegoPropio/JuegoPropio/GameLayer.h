@@ -4,10 +4,10 @@
 
 #include "Enemy.h"
 #include "Background.h"
-#include "Plataforma.h"
 #include "Zombie.h"
 
 #include <list>
+#include <map> 
 #include <fstream> // Leer ficheros
 #include <sstream> // Leer líneas / String
 
@@ -23,8 +23,8 @@ public:
 
 	Background* background;
 	list<Enemy*> enemies;
-	list<Plataforma*> plataformas;
-	list<Zombie*> zombies;
+	list<Actor*> plataformas;
+	map<int, list<Zombie*>> zombies; // Almacena zombies por fila
 
 	void loadMap(string name);
 	void loadMapObject(char character, float x, float y);

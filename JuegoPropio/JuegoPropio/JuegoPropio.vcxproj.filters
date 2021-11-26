@@ -60,9 +60,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Plataforma.cpp">
-      <Filter>Archivos de origen\Actores</Filter>
-    </ClCompile>
     <ClCompile Include="Zombie.cpp">
       <Filter>Archivos de origen\Actores</Filter>
     </ClCompile>
@@ -97,9 +94,6 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Plataforma.h">
-      <Filter>Archivos de encabezado\Actores</Filter>
     </ClInclude>
     <ClInclude Include="Zombie.h">
       <Filter>Archivos de encabezado\Actores</Filter>
