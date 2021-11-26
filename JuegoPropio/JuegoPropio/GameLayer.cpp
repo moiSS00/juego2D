@@ -31,6 +31,19 @@ void GameLayer::update() {
 		}
 	}
 
+	// Colisiones
+	for (it = zombies.begin(); it != zombies.end(); it++) {
+		for (auto const& zombie : it->second) {
+			for (auto const& enemy : enemies) {
+				if (zombie->isOverlap(enemy) && zombie->containsPoint(enemy->x + 5, enemy->y)) {
+					init(); 
+					return; 
+				}
+			}
+		}
+	}
+
+
 	cout << "update GameLayer" << endl;
 }
 

@@ -7,9 +7,13 @@ Zombie::Zombie(float x, float y, Game* game)
 		600, 72, 3, 10, game);
 	animation = aMoving;
 
+	vx = -1;
 }
 
 void Zombie::update() {
+
+	x = x + vx;
+
 	// Actualizar la animación
 	animation->update();
 }

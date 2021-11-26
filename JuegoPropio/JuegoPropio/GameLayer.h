@@ -24,7 +24,9 @@ public:
 	Background* background;
 	list<Enemy*> enemies;
 	list<Actor*> plataformas;
-	map<int, list<Zombie*>> zombies; // Almacena zombies por fila
+
+	// Almacena zombies por fila. Se utiliza un map para evitar que un zombie se pinte encima de otro que este en otra fila
+	map<int, list<Zombie*>> zombies; 
 
 	void loadMap(string name);
 	void loadMapObject(char character, float x, float y);
