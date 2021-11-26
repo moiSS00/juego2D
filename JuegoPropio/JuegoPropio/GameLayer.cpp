@@ -39,16 +39,21 @@ void GameLayer::update() {
 		for (auto const& zombie : it->second) {
 			for (auto const& enemy : enemies) {
 				if (zombie->isOverlap(enemy) && zombie->containsPoint(enemy->x + 5, enemy->y)) {
-					enemy->loseLife(); 
-					if (enemy->lifes == 0) {
-						bool eInList = std::find(deleteEnemies.begin(),
-							deleteEnemies.end(),
-							enemy) != deleteEnemies.end();
+					zombie->attack(); 
+					if (ticksEnemyDamage == 35) {
+						enemy->loseLife();
+						if (enemy->lifes == 0) {
+							bool eInList = std::find(deleteEnemies.begin(),
+								deleteEnemies.end(),
+								enemy) != deleteEnemies.end();
 
-						if (!eInList) {
-							deleteEnemies.push_back(enemy);
+							if (!eInList) {
+								deleteEnemies.push_back(enemy);
+							}
 						}
+						ticksEnemyDamage = 0;
 					}
+					ticksEnemyDamage++;
 				}
 			}
 		}

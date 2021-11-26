@@ -8,6 +8,11 @@ public:
 	Zombie(float x, float y, Game* game);
 	void update();
 	void draw() override;
+	void attack();
+
+	// Controlar ataque
+	int attackCadence = 30;
+	int attackTime = 0;
 };
 
 

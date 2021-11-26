@@ -29,6 +29,11 @@ public:
 
 	bool scaledToMax = false;
 	float scaleLower = 1;
+
+	int const stateMoving = 1;
+	int const stateAttacking = 2;
+	int const stateDying = 3;
+	int const stateDead = 4;
 };
 
 

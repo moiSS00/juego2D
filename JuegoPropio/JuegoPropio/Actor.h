@@ -22,7 +22,10 @@ public:
 	int fileHeight;
 	Game* game; // referencia al juego
 	bool clicked; // Está pulsado
+	int state;
 
+	Animation* aAttacking;
+	Animation* aDying;
 	Animation* aMoving;
 	Animation* animation; // Referencia a la animación mostrada
 

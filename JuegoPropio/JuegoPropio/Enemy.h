@@ -9,6 +9,7 @@ public:
 	void update();
 	virtual void loseLife() {};
 	void draw() override;
+	void attack(); 
 
 	int lifes;
 };

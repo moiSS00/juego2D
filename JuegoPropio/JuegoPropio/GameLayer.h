@@ -20,6 +20,10 @@ public:
 	void update() override;
 	void draw() override;
 	void mouseToControls(SDL_Event event); // USO DE MOUSE
+	void loadMap(string name);
+	void loadMapObject(char character, float x, float y);
+
+	int ticksEnemyDamage = 0;
 
 	Background* background;
 	list<Enemy*> enemies;
@@ -27,9 +31,5 @@ public:
 
 	// Almacena zombies por fila. Se utiliza un map para evitar que un zombie se pinte encima de otro que este en otra fila
 	map<int, list<Zombie*>> zombies; 
-
-	void loadMap(string name);
-	void loadMapObject(char character, float x, float y);
-
 };
 

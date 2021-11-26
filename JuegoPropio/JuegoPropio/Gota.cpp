@@ -4,10 +4,10 @@ Gota::Gota(float x, float y, Game* game)
 	: Enemy(x, y, game) {
 
 	aMoving = new Animation("res/gotaEstado.png", width, height,
-		800, 50, 3, 16, game);
+		800, 50, 3, 16, true, game);
 	animation = aMoving;
 
-	lifes = 0;
+	lifes = 1;
 
 }
 

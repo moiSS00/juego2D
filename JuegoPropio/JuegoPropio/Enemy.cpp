@@ -12,3 +12,7 @@ void Enemy::update() {
 void Enemy::draw() {
 	animation->draw(x, y);
 }
+
+void Enemy::attack() {
+	state = game->stateAttacking; 
+}
