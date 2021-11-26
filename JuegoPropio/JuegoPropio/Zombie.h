@@ -9,6 +9,7 @@ public:
 	void update();
 	void draw() override;
 	void attack();
+	void impacted();
 
 	// Controlar ataque
 	int attackCadence = 30;

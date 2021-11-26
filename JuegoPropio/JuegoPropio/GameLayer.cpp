@@ -43,18 +43,24 @@ void GameLayer::update() {
 					if (ticksEnemyDamage == 35) {
 						enemy->loseLife();
 						if (enemy->lifes == 0) {
-							bool eInList = std::find(deleteEnemies.begin(),
-								deleteEnemies.end(),
-								enemy) != deleteEnemies.end();
-
-							if (!eInList) {
-								deleteEnemies.push_back(enemy);
-							}
+							enemy->impacted();
 						}
 						ticksEnemyDamage = 0;
 					}
 					ticksEnemyDamage++;
 				}
+			}
+		}
+	}
+
+	for (auto const& enemy : enemies) {
+		if (enemy->state == game->stateDead) {
+			bool eInList = std::find(deleteEnemies.begin(),
+				deleteEnemies.end(),
+				enemy) != deleteEnemies.end();
+
+			if (!eInList) {
+				deleteEnemies.push_back(enemy);
 			}
 		}
 	}
@@ -65,6 +71,7 @@ void GameLayer::update() {
 	for (auto const& delEnemy : deleteEnemies) {
 		enemies.remove(delEnemy);
 	}
+
 	deleteEnemies.clear();
 
 	cout << "update GameLayer" << endl;

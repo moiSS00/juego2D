@@ -10,6 +10,7 @@ public:
 	virtual void loseLife() {};
 	void draw() override;
 	void attack(); 
+	void impacted();
 
 	int lifes;
 };

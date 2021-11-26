@@ -25,16 +25,18 @@ void Zombie::update() {
 		attackTime--;
 	}
 
-	x = x + vx;
-
 	// Actualizar la animación
 	bool endAnimation = animation->update();
 
 	// Acabo la animación, no sabemos cual
 	if (endAnimation) {
-		// Estaba disparando
+		// Estaba atacando
 		if (state == game->stateAttacking) {
 			state = game->stateMoving;
+		}
+		// Estaba muriendo
+		if (state == game->stateDying) {
+			state = game->stateDead;
 		}
 	}
 
@@ -51,6 +53,10 @@ void Zombie::update() {
 		vx = 0;
 	}
 
+	if (state != game->stateDying) {
+		x = x + vx;
+	}
+
 }
 
 void Zombie::draw() {
@@ -64,6 +70,12 @@ void Zombie::attack() {
 		aAttacking->currentFrame = 0;
 	}
 	
+}
+
+void Zombie::impacted() {
+	if (state != game->stateDying) {
+		state = game->stateDying;
+	}
 }
 
 
