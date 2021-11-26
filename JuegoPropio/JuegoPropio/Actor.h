@@ -8,6 +8,8 @@ class Actor
 public:
 	Actor(string filename, float x, float y, int width, int height, Game* game);
 	virtual void draw();
+	bool containsPoint(int pointX, int pointY); // contiene punto
+
 	SDL_Texture* texture;
 	int x;
 	int y;
@@ -18,6 +20,7 @@ public:
 	int fileWidth;
 	int fileHeight;
 	Game* game; // referencia al juego
+	bool clicked; // Está pulsado
 
 	Animation* aMoving;
 	Animation* animation; // Referencia a la animación mostrada

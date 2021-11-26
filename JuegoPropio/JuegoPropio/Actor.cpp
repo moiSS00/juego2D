@@ -1,6 +1,7 @@
 #include "Actor.h"
 
 Actor::Actor(string filename, float x, float y, int width, int height, Game* game) {
+	clicked = false;
 	this->game = game;
 	SDL_Surface* surface = IMG_Load(filename.c_str());
 	texture = SDL_CreateTextureFromSurface(game->renderer, surface);
@@ -32,3 +33,14 @@ void Actor::draw() {
 	SDL_RenderCopyEx(game->renderer,
 		texture, &source, &destination, 0, NULL, SDL_FLIP_NONE);
 }
+
+bool Actor::containsPoint(int pointX, int pointY) {
+	if (pointY >= y - height / 2 &&
+		pointY <= y + height / 2 &&
+		pointX <= x + width / 2 &&
+		pointX >= x - width / 2) {
+		return true;
+	}
+	return false;
+}
+
