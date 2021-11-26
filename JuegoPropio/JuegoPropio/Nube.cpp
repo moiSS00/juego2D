@@ -7,5 +7,12 @@ Nube::Nube(float x, float y, Game* game)
 		400, 50, 3, 8, game);
 	animation = aMoving;
 
+	lifes = 0;
+}
+
+void Nube::loseLife() {
+	if (lifes > 0) {
+		lifes--;
+	}
 }
 

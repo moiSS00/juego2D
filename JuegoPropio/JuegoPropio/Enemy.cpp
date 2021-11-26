@@ -12,4 +12,3 @@ void Enemy::update() {
 void Enemy::draw() {
 	animation->draw(x, y);
 }
-

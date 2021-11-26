@@ -32,17 +32,35 @@ void GameLayer::update() {
 	}
 
 	// Colisiones
+
+	// Colision Zombie <-> Enemigo
+	list<Enemy*> deleteEnemies;
 	for (it = zombies.begin(); it != zombies.end(); it++) {
 		for (auto const& zombie : it->second) {
 			for (auto const& enemy : enemies) {
 				if (zombie->isOverlap(enemy) && zombie->containsPoint(enemy->x + 5, enemy->y)) {
-					init(); 
-					return; 
+					enemy->loseLife(); 
+					if (enemy->lifes == 0) {
+						bool eInList = std::find(deleteEnemies.begin(),
+							deleteEnemies.end(),
+							enemy) != deleteEnemies.end();
+
+						if (!eInList) {
+							deleteEnemies.push_back(enemy);
+						}
+					}
 				}
 			}
 		}
 	}
 
+	// Fase de eliminación 
+
+	// Eliminamos enemigos
+	for (auto const& delEnemy : deleteEnemies) {
+		enemies.remove(delEnemy);
+	}
+	deleteEnemies.clear();
 
 	cout << "update GameLayer" << endl;
 }
