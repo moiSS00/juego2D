@@ -23,34 +23,27 @@ void GameLayer::update() {
 		enemy->update();
 	}
 
-	map<int, list<Zombie*>>::iterator it;
-	for (it = zombies.begin(); it != zombies.end(); it++)
-	{
-		for (auto const& zombie : it->second) {
-			zombie->update();
-		}
+
+	for (auto const& zombie : zombies) {
+		zombie->update();
 	}
+	
 
 	// Colisiones
 
 	// Colision Zombie <-> Enemigo
 	list<Enemy*> deleteEnemies;
-	for (it = zombies.begin(); it != zombies.end(); it++) {
-		for (auto const& zombie : it->second) {
-			for (auto const& enemy : enemies) {
-				if (zombie->isOverlap(enemy) && zombie->containsPoint(enemy->x + 5, enemy->y)) {
-					zombie->attack(); 
-					if (ticksEnemyDamage == 35) {
-						enemy->loseLife();
-						if (enemy->lifes == 0) {
-							enemy->impacted();
-						}
-						ticksEnemyDamage = 0;
-					}
-					ticksEnemyDamage++;
+	for (auto const& zombie : zombies) {
+		for (auto const& enemy : enemies) {
+			if (zombie->isOverlap(enemy) && zombie->containsPoint(enemy->x + 5, enemy->y)) {
+				zombie->attack(); 
+				if (ticksEnemyDamage == 30) {
+					enemy->loseLife();
+					ticksEnemyDamage = 0;
 				}
+				ticksEnemyDamage++;
 			}
-		}
+		}	
 	}
 
 	for (auto const& enemy : enemies) {
@@ -86,13 +79,22 @@ void GameLayer::draw() {
 		plataforma->draw();
 	}
 	
+	// Pintar por orden los zombies
+	map<int, list<Zombie*>> zombiesFila;
 	map<int, list<Zombie*>>::iterator it;
-	for (it = zombies.begin(); it != zombies.end(); it++)
+
+	for (auto const& zombie : zombies) {
+		zombiesFila[zombie->y].push_back(zombie);
+	}
+
+	for (it = zombiesFila.begin(); it != zombiesFila.end(); it++)
 	{
 		for (auto const& zombie : it->second) {
 			zombie->draw();
 		}
 	}
+
+	zombiesFila.clear(); 
 
 	SDL_RenderPresent(game->renderer); // Renderiza
 }
@@ -109,7 +111,7 @@ void GameLayer::processControls() {
 	for (auto const& plataforma : plataformas) {
 		if (plataforma->clicked) {
 			Zombie* zombie = new Zombie(plataforma->x, plataforma->y - 20, game);
-			zombies[zombie->y].push_back(zombie);
+			zombies.push_back(zombie);
 			plataforma->clicked = false;
 		}
 	}

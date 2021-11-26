@@ -28,8 +28,6 @@ public:
 	Background* background;
 	list<Enemy*> enemies;
 	list<Actor*> plataformas;
-
-	// Almacena zombies por fila. Se utiliza un map para evitar que un zombie se pinte encima de otro que este en otra fila
-	map<int, list<Zombie*>> zombies; 
+	list<Zombie*> zombies; 
 };
 

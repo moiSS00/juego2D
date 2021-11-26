@@ -14,9 +14,4 @@ Nube::Nube(float x, float y, Game* game)
 	lifes = 1;
 }
 
-void Nube::loseLife() {
-	if (lifes > 0) {
-		lifes--;
-	}
-}
 

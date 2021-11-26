@@ -39,3 +39,12 @@ void Enemy::impacted() {
 		state = game->stateDying;
 	}
 }
+
+void Enemy::loseLife() {
+	if (lifes > 0) {
+		lifes--;
+	}
+	else {
+		state = game->stateDying; 
+	}
+}

@@ -14,9 +14,5 @@ Hielo::Hielo(float x, float y, Game* game)
 	lifes = 5;
 }
 
-void Hielo::loseLife() {
-	if (lifes > 0) {
-		lifes--;
-	}
-}
+
 

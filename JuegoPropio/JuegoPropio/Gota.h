@@ -6,6 +6,5 @@ class Gota : public Enemy
 {
 public:
 	Gota(float x, float y, Game* game);
-	void loseLife() override; 
 };
 

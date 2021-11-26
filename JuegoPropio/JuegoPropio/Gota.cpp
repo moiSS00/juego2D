@@ -15,9 +15,4 @@ Gota::Gota(float x, float y, Game* game)
 
 }
 
-void Gota::loseLife() {
-	if (lifes > 0) {
-		lifes--;
-	}
-}
 
