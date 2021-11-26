@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actor.h"
+#include "Projectile.h" 
 
 class Enemy : public Actor
 {
@@ -9,7 +10,8 @@ public:
 	void update();
 	void loseLife();
 	void draw() override;
-	void attack(); 
+	Projectile* attack();
+	virtual Projectile* createProjectile() { return NULL; };
 
 	int lifes;
 

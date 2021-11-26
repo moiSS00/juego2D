@@ -42,11 +42,15 @@ void Enemy::draw() {
 	animation->draw(x, y);
 }
 
-void Enemy::attack() {
+Projectile* Enemy::attack() {
 	if (attackTime == 0) {
 		state = game->stateAttacking;
 		attackTime = attackCadence;
 		aAttacking->currentFrame = 0;
+		return createProjectile(); 
+	}
+	else {
+		return NULL; 
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "Background.h"
 #include "Zombie.h"
+#include "Projectile.h"
 
 #include <list>
 #include <map> 
@@ -29,5 +30,6 @@ public:
 	list<Enemy*> enemies;
 	list<Actor*> plataformas;
 	list<Zombie*> zombies; 
+	list<Projectile*> projectiles;
 };
 

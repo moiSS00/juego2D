@@ -15,10 +15,12 @@ void GameLayer::init() {
 	enemies.clear(); // Vaciar por si reiniciamos el juego
 	plataformas.clear(); 
 	zombies.clear(); 
+	projectiles.clear();
 	loadMap("res/0.txt");
 }
 
 void GameLayer::update() {
+	
 	for (auto const& enemy : enemies) {
 		enemy->update();
 	}
@@ -26,6 +28,10 @@ void GameLayer::update() {
 
 	for (auto const& zombie : zombies) {
 		zombie->update();
+	}
+
+	for (auto const& projectile : projectiles) {
+		projectile->update();
 	}
 
 	for (auto const& enemy : enemies) {
@@ -37,8 +43,11 @@ void GameLayer::update() {
 			}
 		}
 		if (aux) {
-			cout << "ENTROOOOOOOOOOOOOOOOO" << endl;
-			enemy->attack(); 
+			Projectile* projectile; 
+			projectile = enemy->attack();
+			if (projectile != NULL) {
+				projectiles.push_back(projectile);
+			}
 		}
 	}
 	
@@ -81,6 +90,9 @@ void GameLayer::update() {
 
 	deleteEnemies.clear();
 
+	cout << "tAMAÑO QUE "  + to_string(projectiles.size())<< endl;
+
+
 	cout << "update GameLayer" << endl;
 }
 
@@ -109,6 +121,11 @@ void GameLayer::draw() {
 	}
 
 	zombiesFila.clear(); 
+
+	for (auto const& projectile : projectiles) {
+		projectile->draw();
+	}
+
 
 	SDL_RenderPresent(game->renderer); // Renderiza
 }

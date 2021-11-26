@@ -19,4 +19,9 @@ Gota::Gota(float x, float y, Game* game)
 
 }
 
+Projectile* Gota::createProjectile() {
+	return new Projectile(x, y, game, "res/disparoGota.png");
+}
+
+
 
