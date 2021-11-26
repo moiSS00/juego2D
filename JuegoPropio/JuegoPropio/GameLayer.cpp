@@ -27,6 +27,20 @@ void GameLayer::update() {
 	for (auto const& zombie : zombies) {
 		zombie->update();
 	}
+
+	for (auto const& enemy : enemies) {
+		bool aux = false; 
+		for (auto const& zombie : zombies) {
+			if (zombie->y +10 == enemy->y) {
+				aux = true;
+				break;
+			}
+		}
+		if (aux) {
+			cout << "ENTROOOOOOOOOOOOOOOOO" << endl;
+			enemy->attack(); 
+		}
+	}
 	
 
 	// Colisiones

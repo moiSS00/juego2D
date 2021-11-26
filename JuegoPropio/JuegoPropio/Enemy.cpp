@@ -6,11 +6,20 @@ Enemy::Enemy(float x, float y, Game* game)
 }
 
 void Enemy::update() {
+
+	if (attackTime > 0) {
+		attackTime--;
+	}
+
 	// Actualizar la animación
 	bool endAnimation = animation->update();
 
 	// Acabo la animación, no sabemos cual
 	if (endAnimation) {
+		// Estaba atacando
+		if (state == game->stateAttacking) {
+			state = game->stateMoving;
+		}
 		// Estaba muriendo
 		if (state == game->stateDying) {
 			state = game->stateDead;
@@ -19,6 +28,9 @@ void Enemy::update() {
 
 	if (state == game->stateMoving) {
 		animation = aMoving;
+	}
+	if (state == game->stateAttacking) {
+		animation = aAttacking;
 	}
 	if (state == game->stateDying) {
 		animation = aDying;
@@ -31,14 +43,13 @@ void Enemy::draw() {
 }
 
 void Enemy::attack() {
-	state = game->stateAttacking; 
-}
-
-void Enemy::impacted() {
-	if (state != game->stateDying) {
-		state = game->stateDying;
+	if (attackTime == 0) {
+		state = game->stateAttacking;
+		attackTime = attackCadence;
+		aAttacking->currentFrame = 0;
 	}
 }
+
 
 void Enemy::loseLife() {
 	if (lifes > 0) {

@@ -10,9 +10,12 @@ public:
 	void loseLife();
 	void draw() override;
 	void attack(); 
-	void impacted();
 
 	int lifes;
+
+	// Controlar ataque
+	int attackCadence; 
+	int attackTime = 0;
 };
 
 
