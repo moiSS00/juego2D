@@ -164,6 +164,7 @@
     <ClCompile Include="Nube.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Zombie.cpp" />
+    <ClCompile Include="ZombieBasico.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Nube.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Zombie.h" />
+    <ClInclude Include="ZombieBasico.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,6 +4,8 @@
 #include "Hielo.h"
 #include "Nube.h"
 
+#include "ZombieBasico.h"
+
 GameLayer::GameLayer(Game* game)
 	: Layer(game) {
 	//llama al constructor del padre : Layer(renderer)
@@ -81,14 +83,59 @@ void GameLayer::update() {
 		}
 	}
 
+	// Colisiones , Enemy - Projectile
+
+	list<Zombie*> deleteZombies;
+	list<Projectile*> deleteProjectiles;
+
+	for (auto const& zombie : zombies) {
+		for (auto const& projectile : projectiles) {
+			if (zombie->isOverlap(projectile) && zombie->state != game->stateDead
+				&& zombie->state != game->stateDying && projectile->y == zombie->y + 10) {
+				zombie->loseLife(); 
+				bool pInList = std::find(deleteProjectiles.begin(),
+					deleteProjectiles.end(),
+					projectile) != deleteProjectiles.end();
+
+				if (!pInList) {
+					deleteProjectiles.push_back(projectile);
+				}
+
+			}
+		}
+	}
+
+	for (auto const& zombie : zombies) {
+		if (zombie->state == game->stateDead) {
+			bool eInList = std::find(deleteZombies.begin(),
+				deleteZombies.end(),
+				zombie) != deleteZombies.end();
+
+			if (!eInList) {
+				deleteZombies.push_back(zombie);
+			}
+		}
+	}
+
+
 	// Fase de eliminación 
 
 	// Eliminamos enemigos
 	for (auto const& delEnemy : deleteEnemies) {
 		enemies.remove(delEnemy);
 	}
-
 	deleteEnemies.clear();
+
+	for (auto const& delZombie : deleteZombies) {
+		zombies.remove(delZombie);
+	}
+	deleteZombies.clear();
+
+	for (auto const& delProjectile : deleteProjectiles) {
+		projectiles.remove(delProjectile);
+	}
+	deleteProjectiles.clear();
+
 
 	cout << "update GameLayer" << endl;
 }
@@ -138,7 +185,7 @@ void GameLayer::processControls() {
 	// procesar controles
 	for (auto const& plataforma : plataformas) {
 		if (plataforma->clicked) {
-			Zombie* zombie = new Zombie(plataforma->x, plataforma->y - 20, game);
+			Zombie* zombie = new ZombieBasico(plataforma->x, plataforma->y - 20, game);
 			zombies.push_back(zombie);
 			plataforma->clicked = false;
 		}

@@ -2,21 +2,7 @@
 
 Zombie::Zombie(float x, float y, Game* game)
 	: Actor("", x, y, 60, 70, game) {
-
 	state = game->stateMoving;
-
-	aMoving = new Animation("res/zombieBasicoCaminar.png", width, height,
-		600, 72, 3, 10, true, game);
-
-	aAttacking = new Animation("res/zombieBasicoAtacar.png",
-		width, height, 480, 72, 3, 8, false, game);
-
-	aDying = new Animation("res/zombieBasicoMorir.png",
-		width, height, 720, 50, 3, 12, false, game);
-
-	animation = aMoving;
-
-	vx = -1;
 }
 
 void Zombie::update() {
@@ -72,8 +58,11 @@ void Zombie::attack() {
 	
 }
 
-void Zombie::impacted() {
-	if (state != game->stateDying) {
+void Zombie::loseLife() {
+	if (lifes > 0) {
+		lifes--;
+	}
+	else {
 		state = game->stateDying;
 	}
 }

@@ -6,7 +6,7 @@ Projectile::Projectile(float x, float y, Game* game, string animationFileName) :
 	aDisparo = new Animation(animationFileName, width, height,
 		200, 50, 3, 4, true, game);
 
-	vx = 9;
+	vx = 4;
 }
 
 void Projectile::update() {
