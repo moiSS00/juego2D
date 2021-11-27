@@ -37,7 +37,7 @@ void GameLayer::update() {
 	for (auto const& enemy : enemies) {
 		bool aux = false; 
 		for (auto const& zombie : zombies) {
-			if (zombie->y +10 == enemy->y) {
+			if (zombie->y +10 == enemy->y && enemy->state == game->stateMoving) {
 				aux = true;
 				break;
 			}
@@ -89,9 +89,6 @@ void GameLayer::update() {
 	}
 
 	deleteEnemies.clear();
-
-	cout << "tAMAÑO QUE "  + to_string(projectiles.size())<< endl;
-
 
 	cout << "update GameLayer" << endl;
 }

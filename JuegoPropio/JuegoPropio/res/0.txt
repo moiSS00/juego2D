@@ -1,6 +1,6 @@
 .........
-.GGGH...Z
-.GGGNN..Z
-.GNNHHNGZ
+.......GZ
+.......HZ
+.......NZ
 .GNHHHHHZ
 .GNNNNNNZ
