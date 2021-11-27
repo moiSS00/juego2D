@@ -25,6 +25,18 @@
     <Filter Include="Archivos de origen\Actores">
       <UniqueIdentifier>{a1fab35a-6a43-4d90-bea8-45f6892d1d35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Actores\Enemigos">
+      <UniqueIdentifier>{e806396e-c091-4d8f-a490-e12d8f891c48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Actores\Enemigos">
+      <UniqueIdentifier>{9ccf08a0-aaf0-42aa-8288-54dd074c97d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Actores\Aliados">
+      <UniqueIdentifier>{a8a513e1-def0-4b16-b906-fb1a76232b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Actores\Aliados">
+      <UniqueIdentifier>{966a4733-f891-4546-b2e2-d3d76a392e64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -42,32 +54,32 @@
     <ClCompile Include="Background.cpp">
       <Filter>Archivos de origen\Actores</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Archivos de origen\Actores</Filter>
-    </ClCompile>
     <ClCompile Include="GameLayer.cpp">
       <Filter>Archivos de origen\Layers</Filter>
-    </ClCompile>
-    <ClCompile Include="Hielo.cpp">
-      <Filter>Archivos de origen\Actores</Filter>
-    </ClCompile>
-    <ClCompile Include="Gota.cpp">
-      <Filter>Archivos de origen\Actores</Filter>
-    </ClCompile>
-    <ClCompile Include="Nube.cpp">
-      <Filter>Archivos de origen\Actores</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Zombie.cpp">
-      <Filter>Archivos de origen\Actores</Filter>
-    </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>Archivos de origen\Actores</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Archivos de origen\Actores\Enemigos</Filter>
+    </ClCompile>
+    <ClCompile Include="Gota.cpp">
+      <Filter>Archivos de origen\Actores\Enemigos</Filter>
+    </ClCompile>
+    <ClCompile Include="Hielo.cpp">
+      <Filter>Archivos de origen\Actores\Enemigos</Filter>
+    </ClCompile>
+    <ClCompile Include="Nube.cpp">
+      <Filter>Archivos de origen\Actores\Enemigos</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>Archivos de origen\Actores\Aliados</Filter>
+    </ClCompile>
     <ClCompile Include="ZombieBasico.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Actores\Aliados</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,32 +95,32 @@
     <ClInclude Include="Background.h">
       <Filter>Archivos de encabezado\Actores</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Archivos de encabezado\Actores</Filter>
-    </ClInclude>
     <ClInclude Include="GameLayer.h">
       <Filter>Archivos de encabezado\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="Gota.h">
-      <Filter>Archivos de encabezado\Actores</Filter>
-    </ClInclude>
-    <ClInclude Include="Hielo.h">
-      <Filter>Archivos de encabezado\Actores</Filter>
-    </ClInclude>
-    <ClInclude Include="Nube.h">
-      <Filter>Archivos de encabezado\Actores</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Zombie.h">
-      <Filter>Archivos de encabezado\Actores</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Archivos de encabezado\Actores</Filter>
     </ClInclude>
     <ClInclude Include="ZombieBasico.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Actores\Aliados</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>Archivos de encabezado\Actores\Aliados</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Archivos de encabezado\Actores\Enemigos</Filter>
+    </ClInclude>
+    <ClInclude Include="Gota.h">
+      <Filter>Archivos de encabezado\Actores\Enemigos</Filter>
+    </ClInclude>
+    <ClInclude Include="Hielo.h">
+      <Filter>Archivos de encabezado\Actores\Enemigos</Filter>
+    </ClInclude>
+    <ClInclude Include="Nube.h">
+      <Filter>Archivos de encabezado\Actores\Enemigos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

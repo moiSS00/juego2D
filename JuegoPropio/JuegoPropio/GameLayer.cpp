@@ -91,7 +91,8 @@ void GameLayer::update() {
 	for (auto const& zombie : zombies) {
 		for (auto const& projectile : projectiles) {
 			if (zombie->isOverlap(projectile) && zombie->state != game->stateDead
-				&& zombie->state != game->stateDying && projectile->y == zombie->y + 10) {
+				&& zombie->state != game->stateDying && projectile->y == zombie->y + 10
+				&& projectile->x <= zombie->x) {
 				zombie->loseLife(); 
 				bool pInList = std::find(deleteProjectiles.begin(),
 					deleteProjectiles.end(),

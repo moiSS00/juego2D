@@ -50,7 +50,7 @@ void Zombie::draw() {
 }
 
 void Zombie::attack() {
-	if (attackTime == 0) {
+	if (attackTime == 0 && state == game->stateMoving) {
 		state = game->stateAttacking;
 		attackTime = attackCadence;
 		aAttacking->currentFrame = 0;
