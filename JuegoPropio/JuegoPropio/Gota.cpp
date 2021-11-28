@@ -14,16 +14,16 @@ Gota::Gota(float x, float y, Game* game)
 
 	animation = aMoving;
 
-	lifes = 1;
+	lifes = 3;
 
 	cerebrosDados = 10; 
 
-	attackCadence = 50; 
+	attackCadence = 60; 
 
 }
 
 Projectile* Gota::createProjectile() {
-	return new Projectile(x, y, 1, game, "res/disparoGota.png");
+	return new Projectile(x, y, 5, game, "res/disparoGota.png");
 }
 
 

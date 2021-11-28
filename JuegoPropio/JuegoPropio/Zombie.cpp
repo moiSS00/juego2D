@@ -28,7 +28,7 @@ void Zombie::update() {
 
 	if (state == game->stateMoving) {
 		animation = aMoving;
-		vx = -1;
+		vx = baseVX; 
 	}
 	if (state == game->stateDying) {
 		animation = aDying;
@@ -49,13 +49,14 @@ void Zombie::draw() {
 	animation->draw(x, y);
 }
 
-void Zombie::attack() {
+bool Zombie::attack() {
 	if (attackTime == 0 && state == game->stateMoving) {
 		state = game->stateAttacking;
 		attackTime = attackCadence;
 		aAttacking->currentFrame = 0;
+		return true; 
 	}
-	
+	return false; 
 }
 
 void Zombie::loseLife(int damage) {

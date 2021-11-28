@@ -130,12 +130,10 @@ void GameLayer::update() {
 		for (auto const& enemy : enemies) {
 			if (zombie->isOverlap(enemy) // Hay overlap
 				&& zombie->containsPoint(enemy->x + 5, enemy->y)) { // El zombie y el enemigo estan en la misma fila
-				zombie->attack();
-				if (ticksEnemyDamage == 30) {
+				bool ataque = zombie->attack();
+				if (ataque) {
 					enemy->loseLife(zombie->damage);
-					ticksEnemyDamage = 0;
 				}
-				ticksEnemyDamage++;
 			}
 		}	
 	}

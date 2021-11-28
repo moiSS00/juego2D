@@ -14,9 +14,9 @@ ZombieRapido::ZombieRapido(float x, float y, Game* game)
 
 	animation = aMoving;
 
-	lifes = 3;
+	lifes = 30;
 
-	damage = 1;
+	damage = 3;
 
-	vx = -3;
+	baseVX = -2;
 }

@@ -27,8 +27,6 @@ public:
 	void loadMap(string name);
 	void loadMapObject(char character, float x, float y);
 
-	int ticksEnemyDamage = 0;
-
 	list<Enemy*> enemies;
 	list<Actor*> plataformas;
 	list<Zombie*> zombies; 
