@@ -14,10 +14,21 @@ GameLayer::GameLayer(Game* game)
 	pause = true;
 	message = new Actor("res/mensaje_como_jugar.png", WIDTH * 0.5, HEIGHT * 0.5,
 		WIDTH, HEIGHT, game);
+
+	audioBackground = new Audio("res/musica_ambiente.mp3", true);
+	audioBackground->play();
+
 	init();
 }
 
 void GameLayer::init() {
+
+	// Cerrar canales de audio (excepto el primero que es el de la musica de fondo)
+	for (int i = 0; i < 20; i++) {
+		if (i == 3) {
+			SDL_CloseAudioDevice(i);
+		}
+	}
 
 	cerebros = 100;
 	textCerebros = new Text("", WIDTH * 0.09, HEIGHT * 0.19, 0, 0, 0, game);

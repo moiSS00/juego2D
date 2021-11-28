@@ -7,6 +7,7 @@
 #include "Zombie.h"
 #include "Projectile.h"
 #include "Text.h"
+#include "Audio.h" 
 
 #include <list>
 #include <map> 
@@ -58,5 +59,7 @@ public:
 	Actor* message;
 	bool pause;
 	bool controlContinue = false;
+
+	Audio* audioBackground;
 };
 
