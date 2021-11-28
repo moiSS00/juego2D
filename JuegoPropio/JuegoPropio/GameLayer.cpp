@@ -15,12 +15,17 @@ GameLayer::GameLayer(Game* game)
 
 void GameLayer::init() {
 
+	cerebros = 100;
+	textCerebros = new Text("", WIDTH * 0.09, HEIGHT * 0.19, 0, 0, 0, game);
+	textCerebros->content = to_string(cerebros);
+
 	clickedZombieBasico = false; 
 	clickedZombieRapido = false; 
 
 	// Inicializamos elementos de la interfaz
 	background = new Background("res/fondo.png", WIDTH * 0.5, HEIGHT * 0.5, game);
 	backgroundSelector = new Actor("res/selector.png", WIDTH * 0.33, HEIGHT * 0.10, 179, 66, game);
+	backgroundContadorCerebros = new Actor("res/contadorCerebros.png", WIDTH * 0.07, HEIGHT * 0.10, 69, 65, game);
 	botonZombieBasico = new Actor("res/iconoZombieBasico.png", WIDTH * 0.22, HEIGHT * 0.10, 35, 52, game);
 	botonZombieRapido = new Actor("res/iconoZombieRapido.png", WIDTH * 0.32, HEIGHT * 0.10, 35, 52, game);
 
@@ -92,6 +97,8 @@ void GameLayer::update() {
 
 			if (!eInList) {
 				deleteEnemies.push_back(enemy);
+				cerebros++;
+				textCerebros->content = to_string(cerebros);
 			}
 		}
 	}
@@ -157,9 +164,11 @@ void GameLayer::update() {
 void GameLayer::draw() {
 
 	background->draw();
-	backgroundSelector->draw(); 
+	backgroundSelector->draw();
+	backgroundContadorCerebros->draw(); 
 	botonZombieBasico->draw();
 	botonZombieRapido->draw();
+	textCerebros->draw();
 
 	for (auto const& enemy : enemies) {
 		enemy->draw();

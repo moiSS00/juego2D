@@ -6,6 +6,7 @@
 #include "Background.h"
 #include "Zombie.h"
 #include "Projectile.h"
+#include "Text.h"
 
 #include <list>
 #include <map> 
@@ -33,11 +34,15 @@ public:
 
 	Background* background;
 	Actor* backgroundSelector;
+	Actor* backgroundContadorCerebros; 
 
 	Actor* botonZombieBasico; 
 	Actor* botonZombieRapido;
 
 	bool clickedZombieBasico; 
 	bool clickedZombieRapido; 
+
+	Text* textCerebros;
+	int cerebros;
 };
 

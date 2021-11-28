@@ -82,7 +82,10 @@
       <Filter>Archivos de origen\Actores\Aliados</Filter>
     </ClCompile>
     <ClCompile Include="ZombieRapido.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Actores\Aliados</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Archivos de origen\Actores</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +129,10 @@
       <Filter>Archivos de encabezado\Actores\Enemigos</Filter>
     </ClInclude>
     <ClInclude Include="ZombieRapido.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Actores\Aliados</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Archivos de encabezado\Actores</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

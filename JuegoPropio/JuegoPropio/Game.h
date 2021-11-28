@@ -25,6 +25,7 @@ public:
 	SDL_Window* window; // ventana
 	SDL_Renderer* renderer; // renderizador
 	bool loopActive; // Juego activo
+	TTF_Font* font;
 	Layer* gameLayer;
 
 	bool scaledToMax = false;
