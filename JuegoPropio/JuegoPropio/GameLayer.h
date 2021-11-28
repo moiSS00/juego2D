@@ -39,6 +39,7 @@ public:
 	Actor* botonZombieBasico; 
 	Actor* botonZombieRapido;
 	Actor* botonZombieFuerte;
+	Actor* botonPausa;
 
 	bool clickedZombieBasico; 
 	bool clickedZombieRapido; 
@@ -57,6 +58,7 @@ public:
 	Actor* message;
 	bool pause;
 	bool controlContinue = false;
+	bool controlPause = false;
 
 	Audio* audioBackground;
 	Audio* audioGanar;

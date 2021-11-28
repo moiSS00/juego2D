@@ -47,6 +47,7 @@ void GameLayer::init() {
 	botonZombieBasico = new Actor("res/iconoZombieBasico.png", WIDTH * 0.22, HEIGHT * 0.10, 35, 52, game);
 	botonZombieRapido = new Actor("res/iconoZombieRapido.png", WIDTH * 0.32, HEIGHT * 0.10, 35, 52, game);
 	botonZombieFuerte = new Actor("res/iconoZombieFuerte.png", WIDTH * 0.42, HEIGHT * 0.10, 35, 52, game);
+	botonPausa = new Actor("res/btnPausa.png", WIDTH * 0.93, HEIGHT * 0.10, 69, 65, game);
 
 	// Vaciar por si reiniciamos el juego
 	enemies.clear(); 
@@ -62,6 +63,12 @@ void GameLayer::update() {
 
 	if (pause) {
 		return;
+	}
+
+	if (controlPause) {
+		message = new Actor("res/pausa.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH * 0.45, HEIGHT * 0.45, game);
+		pause = true;
 	}
 
 	// El jugador gana cuando no quedan enemigos
@@ -238,6 +245,7 @@ void GameLayer::draw() {
 	botonZombieBasico->draw();
 	botonZombieRapido->draw();
 	botonZombieFuerte->draw(); 
+	botonPausa->draw();
 	textCerebros->draw();
 	textCosteZombieBasico->draw();
 	textCosteZombieRapido->draw(); 
@@ -364,6 +372,7 @@ void GameLayer::mouseToControls(SDL_Event event) {
 	// Cada vez que hacen click
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
 		controlContinue = true;
+		controlPause = false;
 		if (botonZombieBasico->containsPoint(motionX, motionY)) {
 			clickedZombieBasico = true; 
 			clickedZombieRapido = false; 
@@ -380,6 +389,10 @@ void GameLayer::mouseToControls(SDL_Event event) {
 			clickedZombieFuerte = true;
 			clickedZombieRapido = false;
 			clickedZombieBasico = false;
+		}
+
+		if (botonPausa->containsPoint(motionX, motionY)) {
+			controlPause = true;
 		}
 
 		for (auto const& plataforma : plataformas) {
