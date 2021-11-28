@@ -61,5 +61,9 @@ public:
 	bool controlContinue = false;
 
 	Audio* audioBackground;
+	Audio* audioGanar;
+	Audio* audioPerder;
+	Audio* audioMatarZombie;
+	Audio* audioMatarPlanta;
 };
 

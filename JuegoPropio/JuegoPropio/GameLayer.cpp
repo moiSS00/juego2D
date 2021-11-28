@@ -15,20 +15,18 @@ GameLayer::GameLayer(Game* game)
 	message = new Actor("res/mensaje_como_jugar.png", WIDTH * 0.5, HEIGHT * 0.5,
 		WIDTH, HEIGHT, game);
 
-	audioBackground = new Audio("res/musica_ambiente.mp3", true);
+	audioBackground = new Audio("res/musica_ambiente.wav", true);
 	audioBackground->play();
+
+	audioGanar = new Audio("res/ganar.wav", false);
+	audioPerder = new Audio("res/perder.wav", false);
+	audioMatarPlanta = new Audio("res/matarPlanta.wav", false);
+	audioMatarZombie = new Audio("res/matarZombie.wav", false);
 
 	init();
 }
 
 void GameLayer::init() {
-
-	// Cerrar canales de audio (excepto el primero que es el de la musica de fondo)
-	for (int i = 0; i < 20; i++) {
-		if (i == 3) {
-			SDL_CloseAudioDevice(i);
-		}
-	}
 
 	cerebros = 100;
 	textCerebros = new Text("", WIDTH * 0.09, HEIGHT * 0.19, 0, 0, 0, game);
@@ -75,6 +73,7 @@ void GameLayer::update() {
 		message = new Actor("res/mensaje_ganar.png", WIDTH * 0.5, HEIGHT * 0.5,
 			WIDTH * 0.7, HEIGHT * 0.5, game);
 		pause = true;
+		audioGanar->play(); 
 		init();
 	}
 
@@ -83,6 +82,7 @@ void GameLayer::update() {
 		message = new Actor("res/mensaje_perder.png", WIDTH * 0.5, HEIGHT * 0.5,
 			WIDTH * 0.7, HEIGHT * 0.5, game);
 		pause = true;
+		audioPerder->play(); 
 		init();
 	}
 	
@@ -130,7 +130,7 @@ void GameLayer::update() {
 		for (auto const& enemy : enemies) {
 			if (zombie->isOverlap(enemy) // Hay overlap
 				&& zombie->containsPoint(enemy->x + 5, enemy->y)) { // El zombie y el enemigo estan en la misma fila
-				zombie->attack(); 
+				zombie->attack();
 				if (ticksEnemyDamage == 30) {
 					enemy->loseLife(zombie->damage);
 					ticksEnemyDamage = 0;
@@ -151,6 +151,7 @@ void GameLayer::update() {
 				deleteEnemies.push_back(enemy);
 				cerebros += enemy->cerebrosDados;
 				textCerebros->content = to_string(cerebros);
+				audioMatarPlanta->play();
 			}
 		}
 	}
@@ -176,6 +177,9 @@ void GameLayer::update() {
 				&& zombie->state != game->stateDead && zombie->state != game->stateDying // El zombie no esta en estado "dead" o "dying"
 				&& projectile->y == zombie->y + 10 && projectile->x <= zombie->x) { // Estan en la misma fila y el proyectil esta antes del zombie
 				zombie->loseLife(projectile->damage); 
+				if (zombie->state == game->stateDying) {
+					audioMatarZombie->play();
+				}
 				bool pInList = std::find(deleteProjectiles.begin(),
 					deleteProjectiles.end(),
 					projectile) != deleteProjectiles.end();
