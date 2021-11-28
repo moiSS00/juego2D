@@ -103,7 +103,7 @@ void GameLayer::update() {
 				&& zombie->containsPoint(enemy->x + 5, enemy->y)) { // El zombie y el enemigo estan en la misma fila
 				zombie->attack(); 
 				if (ticksEnemyDamage == 30) {
-					enemy->loseLife();
+					enemy->loseLife(zombie->damage);
 					ticksEnemyDamage = 0;
 				}
 				ticksEnemyDamage++;

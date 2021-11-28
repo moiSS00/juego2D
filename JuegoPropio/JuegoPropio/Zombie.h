@@ -12,6 +12,7 @@ public:
 	void loseLife(int damage);
 
 	int lifes;
+	int damage; 
 
 	// Controlar ataque
 	int attackCadence = 30;

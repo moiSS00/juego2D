@@ -8,7 +8,7 @@ class Enemy : public Actor
 public:
 	Enemy(float x, float y, Game* game);
 	void update();
-	void loseLife();
+	void loseLife(int damage);
 	void draw() override;
 	Projectile* attack();
 	virtual Projectile* createProjectile() { return NULL; };

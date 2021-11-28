@@ -16,5 +16,7 @@ ZombieRapido::ZombieRapido(float x, float y, Game* game)
 
 	lifes = 3;
 
+	damage = 1;
+
 	vx = -3;
 }

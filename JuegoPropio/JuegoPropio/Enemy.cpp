@@ -55,9 +55,9 @@ Projectile* Enemy::attack() {
 }
 
 
-void Enemy::loseLife() {
-	if (lifes > 0) {
-		lifes--;
+void Enemy::loseLife(int damage) {
+	if (lifes - damage > 0) {
+		lifes -= damage; 
 	}
 	else {
 		state = game->stateDying; 
