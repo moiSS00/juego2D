@@ -11,6 +11,9 @@
 GameLayer::GameLayer(Game* game)
 	: Layer(game) {
 	//llama al constructor del padre : Layer(renderer)
+	pause = true;
+	message = new Actor("res/mensaje_como_jugar.png", WIDTH * 0.5, HEIGHT * 0.5,
+		WIDTH, HEIGHT, game);
 	init();
 }
 
@@ -48,12 +51,19 @@ void GameLayer::init() {
 
 void GameLayer::update() {
 
+	if (pause) {
+		return;
+	}
+
 	// El jugador gana cuando no quedan enemigos
 	if (enemies.size() == 0) {
 		game->currentLevel++;
 		if (game->currentLevel > game->finalLevel) {
 			game->currentLevel = 0;
 		}
+		message = new Actor("res/mensaje_ganar.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH * 0.7, HEIGHT * 0.5, game);
+		pause = true;
 		init();
 	}
 	
@@ -242,6 +252,10 @@ void GameLayer::draw() {
 		projectile->draw();
 	}
 
+	if (pause) {
+		message->draw();
+	}
+
 	SDL_RenderPresent(game->renderer); // Renderiza
 }
 
@@ -269,7 +283,12 @@ void GameLayer::processControls() {
 
 	}
 
-	// procesar controles
+	//procesar controles
+
+	if (controlContinue) {
+		pause = false;
+		controlContinue = false;
+	}
 
 	// Se creara un zombie específico en función del zombie seleccionado
 	for (auto const& plataforma : plataformas) {
@@ -323,7 +342,7 @@ void GameLayer::mouseToControls(SDL_Event event) {
 	float motionY = event.motion.y / game->scaleLower;
 	// Cada vez que hacen click
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
-
+		controlContinue = true;
 		if (botonZombieBasico->containsPoint(motionX, motionY)) {
 			clickedZombieBasico = true; 
 			clickedZombieRapido = false; 

@@ -54,5 +54,9 @@ public:
 	int costeZombieBasico = 10; 
 	int costeZombieRapido = 20; 
 	int costeZombieFuerte = 30; 
+
+	Actor* message;
+	bool pause;
+	bool controlContinue = false;
 };
 

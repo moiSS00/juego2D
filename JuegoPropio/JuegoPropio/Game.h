@@ -46,7 +46,7 @@ public:
 	int const stateDead = 4;
 
 	int currentLevel = 0;
-	int finalLevel = 1;
+	int finalLevel = 0;
 };
 
 
