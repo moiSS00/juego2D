@@ -6,6 +6,7 @@
 
 #include "ZombieBasico.h"
 #include "ZombieRapido.h"
+#include "ZombieFuerte.h"
 
 GameLayer::GameLayer(Game* game)
 	: Layer(game) {
@@ -21,6 +22,7 @@ void GameLayer::init() {
 
 	clickedZombieBasico = false; 
 	clickedZombieRapido = false; 
+	clickedZombieFuerte = false; 
 
 	// Inicializamos elementos de la interfaz
 	background = new Background("res/fondo.png", WIDTH * 0.5, HEIGHT * 0.5, game);
@@ -28,6 +30,7 @@ void GameLayer::init() {
 	backgroundContadorCerebros = new Actor("res/contadorCerebros.png", WIDTH * 0.07, HEIGHT * 0.10, 69, 65, game);
 	botonZombieBasico = new Actor("res/iconoZombieBasico.png", WIDTH * 0.22, HEIGHT * 0.10, 35, 52, game);
 	botonZombieRapido = new Actor("res/iconoZombieRapido.png", WIDTH * 0.32, HEIGHT * 0.10, 35, 52, game);
+	botonZombieFuerte = new Actor("res/iconoZombieFuerte.png", WIDTH * 0.42, HEIGHT * 0.10, 35, 52, game);
 
 	// Vaciar por si reiniciamos el juego
 	enemies.clear(); 
@@ -168,6 +171,7 @@ void GameLayer::draw() {
 	backgroundContadorCerebros->draw(); 
 	botonZombieBasico->draw();
 	botonZombieRapido->draw();
+	botonZombieFuerte->draw(); 
 	textCerebros->draw();
 
 	for (auto const& enemy : enemies) {
@@ -221,6 +225,10 @@ void GameLayer::processControls() {
 				Zombie* zombie = new ZombieRapido(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
 			}
+			if (clickedZombieFuerte) {
+				Zombie* zombie = new ZombieFuerte(plataforma->x, plataforma->y - 20, game);
+				zombies.push_back(zombie);
+			}
 			plataforma->clicked = false;
 		}
 	}
@@ -237,11 +245,19 @@ void GameLayer::mouseToControls(SDL_Event event) {
 		if (botonZombieBasico->containsPoint(motionX, motionY)) {
 			clickedZombieBasico = true; 
 			clickedZombieRapido = false; 
+			clickedZombieFuerte = false; 
 		}
 
 		if (botonZombieRapido->containsPoint(motionX, motionY)) {
 			clickedZombieRapido = true; 
 			clickedZombieBasico = false; 
+			clickedZombieFuerte = false;
+		}
+
+		if (botonZombieFuerte->containsPoint(motionX, motionY)) {
+			clickedZombieFuerte = true;
+			clickedZombieRapido = false;
+			clickedZombieBasico = false;
 		}
 
 		for (auto const& plataforma : plataformas) {

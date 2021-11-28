@@ -87,6 +87,9 @@
     <ClCompile Include="Text.cpp">
       <Filter>Archivos de origen\Actores</Filter>
     </ClCompile>
+    <ClCompile Include="ZombieFuerte.cpp">
+      <Filter>Archivos de origen\Actores\Aliados</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>Archivos de encabezado\Actores</Filter>
+    </ClInclude>
+    <ClInclude Include="ZombieFuerte.h">
+      <Filter>Archivos de encabezado\Actores\Aliados</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

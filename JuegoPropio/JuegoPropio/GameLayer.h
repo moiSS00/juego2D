@@ -38,9 +38,11 @@ public:
 
 	Actor* botonZombieBasico; 
 	Actor* botonZombieRapido;
+	Actor* botonZombieFuerte;
 
 	bool clickedZombieBasico; 
 	bool clickedZombieRapido; 
+	bool clickedZombieFuerte;
 
 	Text* textCerebros;
 	int cerebros;

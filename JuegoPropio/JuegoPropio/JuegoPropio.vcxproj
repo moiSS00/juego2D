@@ -166,6 +166,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="ZombieBasico.cpp" />
+    <ClCompile Include="ZombieFuerte.cpp" />
     <ClCompile Include="ZombieRapido.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +184,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="Zombie.h" />
     <ClInclude Include="ZombieBasico.h" />
+    <ClInclude Include="ZombieFuerte.h" />
     <ClInclude Include="ZombieRapido.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
