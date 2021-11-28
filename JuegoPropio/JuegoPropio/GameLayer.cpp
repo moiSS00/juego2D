@@ -250,10 +250,28 @@ void GameLayer::processControls() {
 	// obtener controles
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
-		mouseToControls(event);
+
+		// Cambio automático de input
+		if (event.type == SDL_KEYDOWN) {
+			game->input = game->inputKeyboard;
+		}
+		if (event.type == SDL_MOUSEBUTTONDOWN) {
+			game->input = game->inputMouse;
+		}
+
+		// Procesar teclas
+		if (game->input == game->inputKeyboard) {
+			keysToControls(event);
+		}
+		if (game->input == game->inputMouse) {
+			mouseToControls(event);
+		}
+
 	}
 
 	// procesar controles
+
+	// Se creara un zombie específico en función del zombie seleccionado
 	for (auto const& plataforma : plataformas) {
 		if (plataforma->clicked) {
 			if (clickedZombieBasico && cerebros >= costeZombieBasico) {
@@ -279,6 +297,25 @@ void GameLayer::processControls() {
 	}
 }
 
+void GameLayer::keysToControls(SDL_Event event) {
+	if (event.type == SDL_KEYDOWN) {
+		int code = event.key.keysym.sym;
+		// Pulsada
+		switch (code) {
+			case SDLK_ESCAPE:
+				game->loopActive = false;
+				break;
+			case SDLK_1:
+				game->scale();
+				break;
+		}
+	}
+	if (event.type == SDL_KEYUP) {
+		int code = event.key.keysym.sym;
+		// Levantada
+		switch (code) {}
+	}
+}
 
 void GameLayer::mouseToControls(SDL_Event event) {
 	// Modificación de coordenadas por posible escalado

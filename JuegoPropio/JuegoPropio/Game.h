@@ -31,6 +31,10 @@ public:
 	SDL_Texture* getTexture(string filename);
 	map<string, SDL_Texture*> mapTextures; // map - cache
 
+	int input;
+	int const inputKeyboard = 1;
+	int const inputMouse = 2;
+
 	bool scaledToMax = false;
 	float scaleLower = 1;
 

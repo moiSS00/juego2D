@@ -22,6 +22,7 @@ public:
 	void update() override;
 	void draw() override;
 	void mouseToControls(SDL_Event event); // USO DE MOUSE
+	void keysToControls(SDL_Event event); // USO DE TECLADO
 	void loadMap(string name);
 	void loadMapObject(char character, float x, float y);
 
