@@ -16,6 +16,8 @@ Nube::Nube(float x, float y, Game* game)
 
 	lifes = 1;
 
+	cerebrosDados = 50;
+
 	attackCadence = 75;
 
 }

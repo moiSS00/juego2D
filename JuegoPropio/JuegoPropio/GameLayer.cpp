@@ -20,9 +20,9 @@ void GameLayer::init() {
 	textCerebros = new Text("", WIDTH * 0.09, HEIGHT * 0.19, 0, 0, 0, game);
 	textCerebros->content = to_string(cerebros);
 
-	textCosteZombieBasico = new Text("5", WIDTH * 0.235, HEIGHT * 0.19, 255, 255, 255, game);
-	textCosteZombieRapido = new Text("10", WIDTH * 0.34, HEIGHT * 0.19, 255, 255, 255, game);
-	textCosteZombieFuerte = new Text("15", WIDTH * 0.44, HEIGHT * 0.19, 255, 255, 255, game);
+	textCosteZombieBasico = new Text(to_string(costeZombieBasico), WIDTH * 0.235, HEIGHT * 0.19, 255, 255, 255, game);
+	textCosteZombieRapido = new Text(to_string(costeZombieRapido), WIDTH * 0.34, HEIGHT * 0.19, 255, 255, 255, game);
+	textCosteZombieFuerte = new Text(to_string(costeZombieFuerte), WIDTH * 0.44, HEIGHT * 0.19, 255, 255, 255, game);
 
 	clickedZombieBasico = false; 
 	clickedZombieRapido = false; 
@@ -120,7 +120,7 @@ void GameLayer::update() {
 
 			if (!eInList) {
 				deleteEnemies.push_back(enemy);
-				cerebros++;
+				cerebros += enemy->cerebrosDados;
 				textCerebros->content = to_string(cerebros);
 			}
 		}
@@ -256,22 +256,22 @@ void GameLayer::processControls() {
 	// procesar controles
 	for (auto const& plataforma : plataformas) {
 		if (plataforma->clicked) {
-			if (clickedZombieBasico) {
+			if (clickedZombieBasico && cerebros >= costeZombieBasico) {
 				Zombie* zombie = new ZombieBasico(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
-				cerebros--;
+				cerebros -= costeZombieBasico;
 				textCerebros->content = to_string(cerebros);
 			}
-			if (clickedZombieRapido) {
+			if (clickedZombieRapido && cerebros >= costeZombieRapido) {
 				Zombie* zombie = new ZombieRapido(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
-				cerebros--;
+				cerebros -= costeZombieRapido;
 				textCerebros->content = to_string(cerebros);
 			}
-			if (clickedZombieFuerte) {
+			if (clickedZombieFuerte && cerebros >= costeZombieFuerte) {
 				Zombie* zombie = new ZombieFuerte(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
-				cerebros--;
+				cerebros -= costeZombieFuerte;
 				textCerebros->content = to_string(cerebros);
 			}
 			plataforma->clicked = false;

@@ -49,5 +49,9 @@ public:
 	Text* textCosteZombieBasico;
 	Text* textCosteZombieRapido;
 	Text* textCosteZombieFuerte;
+
+	int costeZombieBasico = 10; 
+	int costeZombieRapido = 20; 
+	int costeZombieFuerte = 30; 
 };
 

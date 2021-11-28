@@ -15,6 +15,9 @@ Gota::Gota(float x, float y, Game* game)
 	animation = aMoving;
 
 	lifes = 1;
+
+	cerebrosDados = 10; 
+
 	attackCadence = 50; 
 
 }

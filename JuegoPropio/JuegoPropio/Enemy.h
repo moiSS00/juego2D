@@ -14,6 +14,7 @@ public:
 	virtual Projectile* createProjectile() { return NULL; };
 
 	int lifes;
+	int cerebrosDados; 
 
 	// Controlar ataque
 	int attackCadence; 

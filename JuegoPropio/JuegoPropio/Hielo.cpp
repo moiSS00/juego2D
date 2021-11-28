@@ -16,6 +16,8 @@ Hielo::Hielo(float x, float y, Game* game)
 
 	lifes = 5;
 
+	cerebrosDados = 30;
+
 	attackCadence = 100;
 
 }

@@ -17,6 +17,5 @@ ZombieBasico::ZombieBasico(float x, float y, Game* game)
 	lifes = 3;
 
 	vx = -1;
-
 }
 
