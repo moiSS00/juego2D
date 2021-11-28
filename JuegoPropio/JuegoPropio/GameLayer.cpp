@@ -66,6 +66,14 @@ void GameLayer::update() {
 		pause = true;
 		init();
 	}
+
+	// El jugador pierde cuando no queda ningun zombie en el campo, queda algun enemigo y tampoco tiene puntos para comprar algun zombie
+	if (zombies.size() == 0 && enemies.size() > 0 && cerebros < costeZombieBasico) {
+		message = new Actor("res/mensaje_perder.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH * 0.7, HEIGHT * 0.5, game);
+		pause = true;
+		init();
+	}
 	
 	// Actualizamos a los enemigos
 	for (auto const& enemy : enemies) {
