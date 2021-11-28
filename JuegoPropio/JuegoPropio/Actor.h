@@ -10,6 +10,7 @@ public:
 	virtual void draw();
 	bool containsPoint(int pointX, int pointY); // contiene punto
 	bool isOverlap(Actor* actor);
+	bool isInRender();
 
 	SDL_Texture* texture;
 	int x;

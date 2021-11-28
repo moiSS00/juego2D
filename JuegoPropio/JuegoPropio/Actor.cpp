@@ -3,6 +3,7 @@
 Actor::Actor(string filename, float x, float y, int width, int height, Game* game) {
 	clicked = false;
 	this->game = game;
+	texture = game->getTexture(filename);
 	SDL_Surface* surface = IMG_Load(filename.c_str());
 	texture = SDL_CreateTextureFromSurface(game->renderer, surface);
 	this->x = x;
@@ -55,5 +56,14 @@ bool Actor::isOverlap(Actor* actor) {
 	}
 	return overlap;
 }
+
+bool Actor::isInRender() {
+	if (x - width / 2 <= WIDTH && x + width / 2 >= 0 &&
+		y - height / 2 <= HEIGHT && y + height / 2 >= 0) {
+		return true;
+	}
+	return false;
+}
+
 
 

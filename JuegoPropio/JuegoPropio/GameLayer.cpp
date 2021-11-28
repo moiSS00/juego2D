@@ -115,6 +115,19 @@ void GameLayer::update() {
 	list<Zombie*> deleteZombies;
 	list<Projectile*> deleteProjectiles;
 
+	for (auto const& projectile : projectiles) {
+		if (projectile->isInRender() == false) {
+
+			bool pInList = std::find(deleteProjectiles.begin(),
+				deleteProjectiles.end(),
+				projectile) != deleteProjectiles.end();
+
+			if (!pInList) {
+				deleteProjectiles.push_back(projectile);
+			}
+		}
+	}
+
 	for (auto const& zombie : zombies) {
 		for (auto const& projectile : projectiles) {
 			if (zombie->isOverlap(projectile) && zombie->state != game->stateDead
@@ -134,7 +147,7 @@ void GameLayer::update() {
 	}
 
 	for (auto const& zombie : zombies) {
-		if (zombie->state == game->stateDead) {
+		if (zombie->state == game->stateDead || zombie->isInRender() == false) {
 			bool eInList = std::find(deleteZombies.begin(),
 				deleteZombies.end(),
 				zombie) != deleteZombies.end();
