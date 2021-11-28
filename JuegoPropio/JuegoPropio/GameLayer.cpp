@@ -146,7 +146,7 @@ void GameLayer::update() {
 			if (zombie->isOverlap(projectile) // Hay overlap 
 				&& zombie->state != game->stateDead && zombie->state != game->stateDying // El zombie no esta en estado "dead" o "dying"
 				&& projectile->y == zombie->y + 10 && projectile->x <= zombie->x) { // Estan en la misma fila y el proyectil esta antes del zombie
-				zombie->loseLife(); 
+				zombie->loseLife(projectile->damage); 
 				bool pInList = std::find(deleteProjectiles.begin(),
 					deleteProjectiles.end(),
 					projectile) != deleteProjectiles.end();

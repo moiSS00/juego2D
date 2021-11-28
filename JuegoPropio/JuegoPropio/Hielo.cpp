@@ -23,7 +23,7 @@ Hielo::Hielo(float x, float y, Game* game)
 }
 
 Projectile* Hielo::createProjectile() {
-	return new Projectile(x, y, game, "res/disparoHielo.png");
+	return new Projectile(x, y, 3, game, "res/disparoHielo.png");
 }
 
 

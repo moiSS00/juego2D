@@ -23,7 +23,7 @@ Nube::Nube(float x, float y, Game* game)
 }
 
 Projectile* Nube::createProjectile() {
-	return new Projectile(x, y, game, "res/disparoNube.png");
+	return new Projectile(x, y, 2, game, "res/disparoNube.png");
 }
 
 

@@ -9,7 +9,7 @@ public:
 	void update();
 	void draw() override;
 	void attack();
-	void loseLife();
+	void loseLife(int damage);
 
 	int lifes;
 
