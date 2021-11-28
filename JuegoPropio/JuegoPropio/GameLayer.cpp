@@ -20,6 +20,10 @@ void GameLayer::init() {
 	textCerebros = new Text("", WIDTH * 0.09, HEIGHT * 0.19, 0, 0, 0, game);
 	textCerebros->content = to_string(cerebros);
 
+	textCosteZombieBasico = new Text("5", WIDTH * 0.235, HEIGHT * 0.19, 255, 255, 255, game);
+	textCosteZombieRapido = new Text("10", WIDTH * 0.34, HEIGHT * 0.19, 255, 255, 255, game);
+	textCosteZombieFuerte = new Text("15", WIDTH * 0.44, HEIGHT * 0.19, 255, 255, 255, game);
+
 	clickedZombieBasico = false; 
 	clickedZombieRapido = false; 
 	clickedZombieFuerte = false; 
@@ -173,6 +177,9 @@ void GameLayer::draw() {
 	botonZombieRapido->draw();
 	botonZombieFuerte->draw(); 
 	textCerebros->draw();
+	textCosteZombieBasico->draw();
+	textCosteZombieRapido->draw(); 
+	textCosteZombieFuerte->draw(); 
 
 	for (auto const& enemy : enemies) {
 		enemy->draw();
@@ -220,14 +227,20 @@ void GameLayer::processControls() {
 			if (clickedZombieBasico) {
 				Zombie* zombie = new ZombieBasico(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
+				cerebros--;
+				textCerebros->content = to_string(cerebros);
 			}
 			if (clickedZombieRapido) {
 				Zombie* zombie = new ZombieRapido(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
+				cerebros--;
+				textCerebros->content = to_string(cerebros);
 			}
 			if (clickedZombieFuerte) {
 				Zombie* zombie = new ZombieFuerte(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
+				cerebros--;
+				textCerebros->content = to_string(cerebros);
 			}
 			plataforma->clicked = false;
 		}

@@ -43,8 +43,11 @@ public:
 	bool clickedZombieBasico; 
 	bool clickedZombieRapido; 
 	bool clickedZombieFuerte;
-
-	Text* textCerebros;
+	
 	int cerebros;
+	Text* textCerebros;
+	Text* textCosteZombieBasico;
+	Text* textCosteZombieRapido;
+	Text* textCosteZombieFuerte;
 };
 
