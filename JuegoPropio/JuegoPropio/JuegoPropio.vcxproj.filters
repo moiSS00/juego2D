@@ -81,6 +81,9 @@
     <ClCompile Include="ZombieBasico.cpp">
       <Filter>Archivos de origen\Actores\Aliados</Filter>
     </ClCompile>
+    <ClCompile Include="ZombieRapido.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="Nube.h">
       <Filter>Archivos de encabezado\Actores\Enemigos</Filter>
+    </ClInclude>
+    <ClInclude Include="ZombieRapido.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

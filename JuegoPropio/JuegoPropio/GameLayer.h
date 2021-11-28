@@ -26,10 +26,18 @@ public:
 
 	int ticksEnemyDamage = 0;
 
-	Background* background;
 	list<Enemy*> enemies;
 	list<Actor*> plataformas;
 	list<Zombie*> zombies; 
 	list<Projectile*> projectiles;
+
+	Background* background;
+	Actor* backgroundSelector;
+
+	Actor* botonZombieBasico; 
+	Actor* botonZombieRapido;
+
+	bool clickedZombieBasico; 
+	bool clickedZombieRapido; 
 };
 

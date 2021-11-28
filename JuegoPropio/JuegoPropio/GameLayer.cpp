@@ -5,6 +5,7 @@
 #include "Nube.h"
 
 #include "ZombieBasico.h"
+#include "ZombieRapido.h"
 
 GameLayer::GameLayer(Game* game)
 	: Layer(game) {
@@ -13,11 +14,23 @@ GameLayer::GameLayer(Game* game)
 }
 
 void GameLayer::init() {
+
+	clickedZombieBasico = false; 
+	clickedZombieRapido = false; 
+
+	// Inicializamos elementos de la interfaz
 	background = new Background("res/fondo.png", WIDTH * 0.5, HEIGHT * 0.5, game);
-	enemies.clear(); // Vaciar por si reiniciamos el juego
+	backgroundSelector = new Actor("res/selector.png", WIDTH * 0.33, HEIGHT * 0.10, 179, 66, game);
+	botonZombieBasico = new Actor("res/iconoZombieBasico.png", WIDTH * 0.22, HEIGHT * 0.10, 35, 52, game);
+	botonZombieRapido = new Actor("res/iconoZombieRapido.png", WIDTH * 0.32, HEIGHT * 0.10, 35, 52, game);
+
+	// Vaciar por si reiniciamos el juego
+	enemies.clear(); 
 	plataformas.clear(); 
 	zombies.clear(); 
 	projectiles.clear();
+
+	// Cargar nivel
 	loadMap("res/0.txt");
 }
 
@@ -142,7 +155,12 @@ void GameLayer::update() {
 }
 
 void GameLayer::draw() {
+
 	background->draw();
+	backgroundSelector->draw(); 
+	botonZombieBasico->draw();
+	botonZombieRapido->draw();
+
 	for (auto const& enemy : enemies) {
 		enemy->draw();
 	}
@@ -186,8 +204,14 @@ void GameLayer::processControls() {
 	// procesar controles
 	for (auto const& plataforma : plataformas) {
 		if (plataforma->clicked) {
-			Zombie* zombie = new ZombieBasico(plataforma->x, plataforma->y - 20, game);
-			zombies.push_back(zombie);
+			if (clickedZombieBasico) {
+				Zombie* zombie = new ZombieBasico(plataforma->x, plataforma->y - 20, game);
+				zombies.push_back(zombie);
+			}
+			if (clickedZombieRapido) {
+				Zombie* zombie = new ZombieRapido(plataforma->x, plataforma->y - 20, game);
+				zombies.push_back(zombie);
+			}
 			plataforma->clicked = false;
 		}
 	}
@@ -200,6 +224,16 @@ void GameLayer::mouseToControls(SDL_Event event) {
 	float motionY = event.motion.y / game->scaleLower;
 	// Cada vez que hacen click
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
+
+		if (botonZombieBasico->containsPoint(motionX, motionY)) {
+			clickedZombieBasico = true; 
+			clickedZombieRapido = false; 
+		}
+
+		if (botonZombieRapido->containsPoint(motionX, motionY)) {
+			clickedZombieRapido = true; 
+			clickedZombieBasico = false; 
+		}
 
 		for (auto const& plataforma : plataformas) {
 			if (plataforma->containsPoint(motionX, motionY)) {
