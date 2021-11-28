@@ -27,6 +27,8 @@ public:
 	SDL_Renderer* renderer; // renderizador
 	bool loopActive; // Juego activo
 	TTF_Font* font;
+	Layer* layer;
+	Layer* menuLayer;
 	Layer* gameLayer;
 	SDL_Texture* getTexture(string filename);
 	map<string, SDL_Texture*> mapTextures; // map - cache

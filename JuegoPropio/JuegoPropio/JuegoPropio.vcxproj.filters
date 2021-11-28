@@ -90,6 +90,9 @@
     <ClCompile Include="ZombieFuerte.cpp">
       <Filter>Archivos de origen\Actores\Aliados</Filter>
     </ClCompile>
+    <ClCompile Include="MenuLayer.cpp">
+      <Filter>Archivos de origen\Layers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="ZombieFuerte.h">
       <Filter>Archivos de encabezado\Actores\Aliados</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuLayer.h">
+      <Filter>Archivos de encabezado\Layers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
