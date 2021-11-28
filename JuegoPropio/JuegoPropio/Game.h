@@ -38,6 +38,9 @@ public:
 	int const stateAttacking = 2;
 	int const stateDying = 3;
 	int const stateDead = 4;
+
+	int currentLevel = 0;
+	int finalLevel = 1;
 };
 
 

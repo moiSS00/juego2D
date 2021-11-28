@@ -43,33 +43,45 @@ void GameLayer::init() {
 	projectiles.clear();
 
 	// Cargar nivel
-	loadMap("res/0.txt");
+	loadMap("res/" + to_string(game->currentLevel) + ".txt");
 }
 
 void GameLayer::update() {
+
+	// El jugador gana cuando no quedan enemigos
+	if (enemies.size() == 0) {
+		game->currentLevel++;
+		if (game->currentLevel > game->finalLevel) {
+			game->currentLevel = 0;
+		}
+		init();
+	}
 	
+	// Actualizamos a los enemigos
 	for (auto const& enemy : enemies) {
 		enemy->update();
 	}
 
-
+	// Actualizamos a los zombies 
 	for (auto const& zombie : zombies) {
 		zombie->update();
 	}
 
+	// Actualizamos a los proyectiles
 	for (auto const& projectile : projectiles) {
 		projectile->update();
 	}
 
+	// Una planta empezará a disparar si tiene algún zombie en su misma fila
 	for (auto const& enemy : enemies) {
-		bool aux = false; 
+		bool shoot = false; 
 		for (auto const& zombie : zombies) {
 			if (zombie->y +10 == enemy->y && enemy->state == game->stateMoving) {
-				aux = true;
+				shoot = true;
 				break;
 			}
 		}
-		if (aux) {
+		if (shoot) {
 			Projectile* projectile; 
 			projectile = enemy->attack();
 			if (projectile != NULL) {
@@ -78,14 +90,17 @@ void GameLayer::update() {
 		}
 	}
 	
-
 	// Colisiones
 
-	// Colision Zombie <-> Enemigo
 	list<Enemy*> deleteEnemies;
+	list<Zombie*> deleteZombies;
+	list<Projectile*> deleteProjectiles;
+
+	// Colision Zombie <-> Enemigo
 	for (auto const& zombie : zombies) {
 		for (auto const& enemy : enemies) {
-			if (zombie->isOverlap(enemy) && zombie->containsPoint(enemy->x + 5, enemy->y)) {
+			if (zombie->isOverlap(enemy) // Hay overlap
+				&& zombie->containsPoint(enemy->x + 5, enemy->y)) { // El zombie y el enemigo estan en la misma fila
 				zombie->attack(); 
 				if (ticksEnemyDamage == 30) {
 					enemy->loseLife();
@@ -96,6 +111,7 @@ void GameLayer::update() {
 		}	
 	}
 
+	// Los enemigos que esten en estado "dead" pasará a eliminarse
 	for (auto const& enemy : enemies) {
 		if (enemy->state == game->stateDead) {
 			bool eInList = std::find(deleteEnemies.begin(),
@@ -110,11 +126,7 @@ void GameLayer::update() {
 		}
 	}
 
-	// Colisiones , Enemy - Projectile
-
-	list<Zombie*> deleteZombies;
-	list<Projectile*> deleteProjectiles;
-
+	// Los proyectiles que no esten en pantalla se eliminan
 	for (auto const& projectile : projectiles) {
 		if (projectile->isInRender() == false) {
 
@@ -128,11 +140,12 @@ void GameLayer::update() {
 		}
 	}
 
+	// Colisiones , Enemy <-> Projectile
 	for (auto const& zombie : zombies) {
 		for (auto const& projectile : projectiles) {
-			if (zombie->isOverlap(projectile) && zombie->state != game->stateDead
-				&& zombie->state != game->stateDying && projectile->y == zombie->y + 10
-				&& projectile->x <= zombie->x) {
+			if (zombie->isOverlap(projectile) // Hay overlap 
+				&& zombie->state != game->stateDead && zombie->state != game->stateDying // El zombie no esta en estado "dead" o "dying"
+				&& projectile->y == zombie->y + 10 && projectile->x <= zombie->x) { // Estan en la misma fila y el proyectil esta antes del zombie
 				zombie->loseLife(); 
 				bool pInList = std::find(deleteProjectiles.begin(),
 					deleteProjectiles.end(),
@@ -146,6 +159,7 @@ void GameLayer::update() {
 		}
 	}
 
+	// Se elimian los zombies que esten en estado "dead" o no esten en pantalla
 	for (auto const& zombie : zombies) {
 		if (zombie->state == game->stateDead || zombie->isInRender() == false) {
 			bool eInList = std::find(deleteZombies.begin(),
@@ -167,23 +181,27 @@ void GameLayer::update() {
 	}
 	deleteEnemies.clear();
 
+	// Eliminamos zombies
 	for (auto const& delZombie : deleteZombies) {
 		zombies.remove(delZombie);
 	}
 	deleteZombies.clear();
 
+	// Eliminamos proyectiles
 	for (auto const& delProjectile : deleteProjectiles) {
 		projectiles.remove(delProjectile);
 	}
 	deleteProjectiles.clear();
-
 
 	cout << "update GameLayer" << endl;
 }
 
 void GameLayer::draw() {
 
+	// Pintamos fondo
 	background->draw();
+
+	// Pintamos elementos de la interfaz
 	backgroundSelector->draw();
 	backgroundContadorCerebros->draw(); 
 	botonZombieBasico->draw();
@@ -194,14 +212,17 @@ void GameLayer::draw() {
 	textCosteZombieRapido->draw(); 
 	textCosteZombieFuerte->draw(); 
 
+	// Pintamos a los enemigos
 	for (auto const& enemy : enemies) {
 		enemy->draw();
 	}
+
+	// Pintamos a los spawns de zombies
 	for (auto const& plataforma : plataformas) {
 		plataforma->draw();
 	}
 	
-	// Pintar por orden los zombies
+	// Pintar a los zombies por orden (ordenados por fila) para que no se pinten unos encimas de otros
 	map<int, list<Zombie*>> zombiesFila;
 	map<int, list<Zombie*>>::iterator it;
 
@@ -215,13 +236,11 @@ void GameLayer::draw() {
 			zombie->draw();
 		}
 	}
-
 	zombiesFila.clear(); 
 
 	for (auto const& projectile : projectiles) {
 		projectile->draw();
 	}
-
 
 	SDL_RenderPresent(game->renderer); // Renderiza
 }
