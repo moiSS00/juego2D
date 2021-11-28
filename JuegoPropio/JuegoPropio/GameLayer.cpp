@@ -260,26 +260,26 @@ void GameLayer::draw() {
 	for (auto const& plataforma : plataformas) {
 		plataforma->draw();
 	}
-	
-	// Pintar a los zombies por orden (ordenados por fila) para que no se pinten unos encimas de otros
-	map<int, list<Zombie*>> zombiesFila;
-	map<int, list<Zombie*>>::iterator it;
+
+	// Pintar a los zombies / proyectiles por orden (ordenados por fila) para que no se pinten unos encimas de otros
+	map<int, list<Actor*>> actoresFila;
+	map<int, list<Actor*>>::iterator it;
 
 	for (auto const& zombie : zombies) {
-		zombiesFila[zombie->y].push_back(zombie);
+		actoresFila[zombie->y].push_back(zombie);
 	}
-
-	for (it = zombiesFila.begin(); it != zombiesFila.end(); it++)
-	{
-		for (auto const& zombie : it->second) {
-			zombie->draw();
-		}
-	}
-	zombiesFila.clear(); 
 
 	for (auto const& projectile : projectiles) {
-		projectile->draw();
+		actoresFila[projectile->y].push_back(projectile);
 	}
+
+	for (it = actoresFila.begin(); it != actoresFila.end(); it++)
+	{
+		for (auto const& actor : it->second) {
+			actor->draw();
+		}
+	}
+	actoresFila.clear();
 
 	if (pause) {
 		message->draw();

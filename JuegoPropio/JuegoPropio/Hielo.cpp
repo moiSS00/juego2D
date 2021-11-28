@@ -14,7 +14,7 @@ Hielo::Hielo(float x, float y, Game* game)
 
 	animation = aMoving;
 
-	lifes = 6;
+	lifes = 15;
 
 	cerebrosDados = 30;
 

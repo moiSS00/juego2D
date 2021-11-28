@@ -16,7 +16,7 @@ ZombieFuerte::ZombieFuerte(float x, float y, Game* game)
 
 	lifes = 70;
 
-	damage = 10;
+	damage = 8;
 	
 	baseVX = -1;
 }
