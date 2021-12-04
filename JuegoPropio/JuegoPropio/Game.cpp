@@ -91,6 +91,10 @@ SDL_Texture* Game::getTexture(string filename) {
 	return mapTextures[filename];
 }
 
+void Game::goToMenuLayer() {
+	layer = menuLayer;
+}
+
 
 
 

@@ -22,6 +22,7 @@ public:
 	Game();
 	void loop();
 	void scale();
+	void goToMenuLayer();
 
 	SDL_Window* window; // ventana
 	SDL_Renderer* renderer; // renderizador

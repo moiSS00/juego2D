@@ -76,11 +76,15 @@ void GameLayer::update() {
 		game->currentLevel++;
 		if (game->currentLevel > game->finalLevel) {
 			game->currentLevel = 0;
+			game->goToMenuLayer(); 
+			audioBackground->play(); 
 		}
-		message = new Actor("res/mensaje_ganar.png", WIDTH * 0.5, HEIGHT * 0.5,
-			WIDTH * 0.7, HEIGHT * 0.5, game);
-		pause = true;
-		audioGanar->play(); 
+		else {
+			message = new Actor("res/mensaje_ganar.png", WIDTH * 0.5, HEIGHT * 0.5,
+				WIDTH * 0.7, HEIGHT * 0.5, game);
+			pause = true;
+			audioGanar->play();
+		}
 		init();
 	}
 
