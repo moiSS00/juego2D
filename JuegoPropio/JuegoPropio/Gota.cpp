@@ -14,7 +14,7 @@ Gota::Gota(float x, float y, Game* game)
 
 	animation = aMoving;
 
-	lifes = 3;
+	lifes = 6;
 
 	cerebrosDados = 10; 
 

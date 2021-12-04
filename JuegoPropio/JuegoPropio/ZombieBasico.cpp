@@ -14,7 +14,7 @@ ZombieBasico::ZombieBasico(float x, float y, Game* game)
 
 	animation = aMoving;
 
-	lifes = 50;
+	lifes = 40;
 
 	damage = 5;
 

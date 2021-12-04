@@ -14,7 +14,7 @@ Hielo::Hielo(float x, float y, Game* game)
 
 	animation = aMoving;
 
-	lifes = 15;
+	lifes = 20;
 
 	cerebrosDados = 30;
 
@@ -23,7 +23,7 @@ Hielo::Hielo(float x, float y, Game* game)
 }
 
 Projectile* Hielo::createProjectile() {
-	return new Projectile(x, y, 2, game, "res/disparoHielo.png");
+	return new Projectile(x, y, 3, game, "res/disparoHielo.png");
 }
 
 

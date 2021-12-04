@@ -14,7 +14,7 @@ Nube::Nube(float x, float y, Game* game)
 
 	animation = aMoving;
 
-	lifes = 1;
+	lifes = 3;
 
 	cerebrosDados = 50;
 
