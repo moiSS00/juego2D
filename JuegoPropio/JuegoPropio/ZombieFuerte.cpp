@@ -14,7 +14,7 @@ ZombieFuerte::ZombieFuerte(float x, float y, Game* game)
 
 	animation = aMoving;
 
-	lifes = 55;
+	lifes = 45;
 
 	damage = 6;
 	
