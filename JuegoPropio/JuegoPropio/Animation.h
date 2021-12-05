@@ -7,7 +7,7 @@ class Animation
 public:
 	Animation(string filename, float actorWidth, float actorHeight,
 		float fileWidth, float fileHeight,
-		int updateFrecuence, int totalFrames, bool loop, Game* game);
+		int updateFrecuence, int totalFrames, bool loop, Game* game, int id);
 	bool update();
 	void draw(float x, float y);
 	int actorWidth; // Actor Width
@@ -17,6 +17,7 @@ public:
 	int currentFrame;
 	int totalFrames;
 	Game* game;
+	int id; 
 
 	// Auxiliares
 	SDL_Texture* texture; // imagen

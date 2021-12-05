@@ -16,13 +16,13 @@ void Enemy::update() {
 
 	// Acabo la animación, no sabemos cual
 	if (endAnimation) {
-		// Estaba atacando
-		if (state == game->stateAttacking) {
-			state = game->stateMoving;
+		if (animation->id == game->stateAttacking) { // Si la animacion era de ataque
+			if (state == game->stateAttacking) { // Comprobamos si no se corta animacion con la de morir
+				state = game->stateMoving; // Sigue moviendose
+			}
 		}
-		// Estaba muriendo
-		if (state == game->stateDying) {
-			state = game->stateDead;
+		if (animation->id == game->stateDying) { // Si la animacion era de muerte 
+			state = game->stateDead; // Pasa a estado final
 		}
 	}
 

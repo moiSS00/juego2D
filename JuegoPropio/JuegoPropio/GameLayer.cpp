@@ -183,7 +183,7 @@ void GameLayer::update() {
 	for (auto const& zombie : zombies) {
 		for (auto const& projectile : projectiles) {
 			if (zombie->isOverlap(projectile) // Hay overlap 
-				&& zombie->state != game->stateDead && zombie->state != game->stateDying // El zombie no esta en estado "dead" o "dying"
+				&& zombie->state != game->stateDying && zombie->state != game->stateDead// El zombie no esta en estado "dying"
 				&& projectile->y == zombie->y + 10 && projectile->x <= zombie->x) { // Estan en la misma fila y el proyectil esta antes del zombie
 				zombie->loseLife(projectile->damage); 
 				if (zombie->state == game->stateDying) {

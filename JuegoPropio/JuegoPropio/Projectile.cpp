@@ -4,7 +4,7 @@ Projectile::Projectile(float x, float y, int damage, Game* game, string animatio
 	Actor("", x, y, 50, 50, game) {
 
 	aDisparo = new Animation(animationFileName, width, height,
-		200, 50, 3, 4, true, game);
+		200, 50, 3, 4, true, game, 0);
 
 	this->damage = damage; 
 	vx = 4;

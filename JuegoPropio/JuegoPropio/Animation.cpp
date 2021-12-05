@@ -2,7 +2,7 @@
 
 Animation::Animation(string filename, float actorWidth, float actorHeight,
 	float fileWidth, float fileHeight,
-	int updateFrecuence, int totalFrames, bool loop, Game* game) {
+	int updateFrecuence, int totalFrames, bool loop, Game* game, int id) {
 
 	// Cargar textura
 	texture = game->getTexture(filename);
@@ -15,6 +15,7 @@ Animation::Animation(string filename, float actorWidth, float actorHeight,
 	this->updateFrecuence = updateFrecuence;
 	this->totalFrames = totalFrames;
 	this->game = game;
+	this->id = id; 
 
 	updateTime = 0; // última actualización
 	currentFrame = 0;
