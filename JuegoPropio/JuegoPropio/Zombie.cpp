@@ -14,6 +14,11 @@ void Zombie::update() {
 	// Actualizar la animación
 	bool endAnimation = animation->update();
 
+	/**
+	* Puede darse el caso de que el zombie cambie su estado a dyung antes de acabar una animacion de ataque, por lo que tenemos 
+	* que tener un control más exhaustivo sobre la animación que ha finlizado. 
+	**/
+
 	// Acabo la animación
 	if (endAnimation) {
 		if (animation->id == game->stateAttacking) { // Si la animacion era de ataque
@@ -39,7 +44,7 @@ void Zombie::update() {
 		vx = 0;
 	}
 
-	if (state != game->stateDying) {
+	if (state == game->stateMoving) {
 		x = x + vx;
 	}
 

@@ -9,49 +9,59 @@
 #include "ZombieFuerte.h"
 
 GameLayer::GameLayer(Game* game)
-	: Layer(game) {
-	//llama al constructor del padre : Layer(renderer)
+	: Layer(game) { //llama al constructor del padre : Layer(renderer)
+
+	// Prepraramos el tutorial inicial
 	pause = true;
 	message = new Actor("res/mensaje_como_jugar.png", WIDTH * 0.5, HEIGHT * 0.5,
 		WIDTH, HEIGHT, game);
 
+	// Inicializamos los audios
 	audioBackground = new Audio("res/musica_ambiente.wav", true);
-	audioBackground->play();
-
 	audioGanar = new Audio("res/ganar.wav", false);
 	audioPerder = new Audio("res/perder.wav", false);
 	audioMatarPlanta = new Audio("res/matarPlanta.wav", false);
 	audioMatarZombie = new Audio("res/matarZombie.wav", false);
+
+	// Ponemos la musica de fondo
+	audioBackground->play();
 
 	init();
 }
 
 void GameLayer::init() {
 
+	// Numero incial de cerebros 
 	cerebros = 100;
+
+	// Fondo
+	background = new Background("res/fondo.png", WIDTH * 0.5, HEIGHT * 0.5, game);
+
+	// Marcador de cerebros
+	backgroundContadorCerebros = new Actor("res/contadorCerebros.png", WIDTH * 0.07, HEIGHT * 0.10, 69, 65, game);
 	textCerebros = new Text("", WIDTH * 0.09, HEIGHT * 0.19, 0, 0, 0, game);
 	textCerebros->content = to_string(cerebros);
 
+	// Selector de zombies
+	backgroundSelector = new Actor("res/selector.png", WIDTH * 0.33, HEIGHT * 0.10, 179, 66, game);
+	botonZombieBasico = new Actor("res/iconoZombieBasico.png", WIDTH * 0.22, HEIGHT * 0.10, 35, 52, game);
+	botonZombieRapido = new Actor("res/iconoZombieRapido.png", WIDTH * 0.32, HEIGHT * 0.10, 35, 52, game);
+	botonZombieFuerte = new Actor("res/iconoZombieFuerte.png", WIDTH * 0.42, HEIGHT * 0.10, 35, 52, game);
 	textCosteZombieBasico = new Text(to_string(costeZombieBasico), WIDTH * 0.235, HEIGHT * 0.19, 255, 255, 255, game);
 	textCosteZombieRapido = new Text(to_string(costeZombieRapido), WIDTH * 0.34, HEIGHT * 0.19, 255, 255, 255, game);
 	textCosteZombieFuerte = new Text(to_string(costeZombieFuerte), WIDTH * 0.44, HEIGHT * 0.19, 255, 255, 255, game);
 
+	// Botón de pausa
+	botonPausa = new Actor("res/btnPausa.png", WIDTH * 0.93, HEIGHT * 0.10, 69, 65, game);
+
+	// Indicadores del zombie seleccionado
 	clickedZombieBasico = false; 
 	clickedZombieRapido = false; 
 	clickedZombieFuerte = false; 
 
-	// Inicializamos elementos de la interfaz
-	background = new Background("res/fondo.png", WIDTH * 0.5, HEIGHT * 0.5, game);
-	backgroundSelector = new Actor("res/selector.png", WIDTH * 0.33, HEIGHT * 0.10, 179, 66, game);
-	backgroundContadorCerebros = new Actor("res/contadorCerebros.png", WIDTH * 0.07, HEIGHT * 0.10, 69, 65, game);
-	botonZombieBasico = new Actor("res/iconoZombieBasico.png", WIDTH * 0.22, HEIGHT * 0.10, 35, 52, game);
-	botonZombieRapido = new Actor("res/iconoZombieRapido.png", WIDTH * 0.32, HEIGHT * 0.10, 35, 52, game);
-	botonZombieFuerte = new Actor("res/iconoZombieFuerte.png", WIDTH * 0.42, HEIGHT * 0.10, 35, 52, game);
-	botonPausa = new Actor("res/btnPausa.png", WIDTH * 0.93, HEIGHT * 0.10, 69, 65, game);
-
-	// Vaciar por si reiniciamos el juego
+	// Vaciar listas para poder reinicar el juego
+	plataformas.clear();
 	enemies.clear(); 
-	plataformas.clear(); 
 	zombies.clear(); 
 	projectiles.clear();
 
@@ -61,10 +71,12 @@ void GameLayer::init() {
 
 void GameLayer::update() {
 
+	// Si estamos en pausa no actualzamos
 	if (pause) {
 		return;
 	}
 
+	// Si le hemos dado al botón de pausa
 	if (controlPause) {
 		message = new Actor("res/pausa.png", WIDTH * 0.5, HEIGHT * 0.5,
 			WIDTH * 0.45, HEIGHT * 0.45, game);
@@ -88,7 +100,7 @@ void GameLayer::update() {
 		init();
 	}
 
-	// El jugador pierde cuando no queda ningun zombie en el campo, queda algun enemigo y tampoco tiene puntos para comprar algun zombie
+	// El jugador pierde cuando no queda ningun zombie en el campo, queda algun enemigo y tampoco tiene puntos para comprar zombies
 	if (zombies.size() == 0 && enemies.size() > 0 && cerebros < costeZombieBasico) {
 		message = new Actor("res/mensaje_perder.png", WIDTH * 0.5, HEIGHT * 0.5,
 			WIDTH * 0.7, HEIGHT * 0.5, game);
@@ -149,7 +161,31 @@ void GameLayer::update() {
 		}	
 	}
 
-	// Los enemigos que esten en estado "dead" pasará a eliminarse
+	// Colisiones , Enemy <-> Projectile
+	for (auto const& zombie : zombies) {
+		for (auto const& projectile : projectiles) {
+			if (zombie->isOverlap(projectile) // Hay overlap 
+				&& zombie->state != game->stateDying && zombie->state != game->stateDead// El zombie no esta en estado "dying" o "dead"
+				&& projectile->y == zombie->y + 10 && projectile->x <= zombie->x) { // Estan en la misma fila y el proyectil esta antes del zombie
+				zombie->loseLife(projectile->damage); 
+				if (zombie->state == game->stateDying) {
+					audioMatarZombie->play();
+				}
+				bool pInList = std::find(deleteProjectiles.begin(),
+					deleteProjectiles.end(),
+					projectile) != deleteProjectiles.end();
+
+				if (!pInList) {
+					deleteProjectiles.push_back(projectile);
+				}
+
+			}
+		}
+	}
+
+	// Fase de eliminación 
+
+	// Los enemigos que esten en estado "dead" pasaran a eliminarse
 	for (auto const& enemy : enemies) {
 		if (enemy->state == game->stateDead) {
 			bool eInList = std::find(deleteEnemies.begin(),
@@ -179,28 +215,6 @@ void GameLayer::update() {
 		}
 	}
 
-	// Colisiones , Enemy <-> Projectile
-	for (auto const& zombie : zombies) {
-		for (auto const& projectile : projectiles) {
-			if (zombie->isOverlap(projectile) // Hay overlap 
-				&& zombie->state != game->stateDying && zombie->state != game->stateDead// El zombie no esta en estado "dying"
-				&& projectile->y == zombie->y + 10 && projectile->x <= zombie->x) { // Estan en la misma fila y el proyectil esta antes del zombie
-				zombie->loseLife(projectile->damage); 
-				if (zombie->state == game->stateDying) {
-					audioMatarZombie->play();
-				}
-				bool pInList = std::find(deleteProjectiles.begin(),
-					deleteProjectiles.end(),
-					projectile) != deleteProjectiles.end();
-
-				if (!pInList) {
-					deleteProjectiles.push_back(projectile);
-				}
-
-			}
-		}
-	}
-
 	// Se elimian los zombies que esten en estado "dead" o no esten en pantalla
 	for (auto const& zombie : zombies) {
 		if (zombie->state == game->stateDead || zombie->isInRender() == false) {
@@ -213,9 +227,6 @@ void GameLayer::update() {
 			}
 		}
 	}
-
-
-	// Fase de eliminación 
 
 	// Eliminamos enemigos
 	for (auto const& delEnemy : deleteEnemies) {
@@ -243,24 +254,28 @@ void GameLayer::draw() {
 	// Pintamos fondo
 	background->draw();
 
-	// Pintamos elementos de la interfaz
+	// Pintamos indicador de cerebros
+	backgroundContadorCerebros->draw();
+	textCerebros->draw();
+
+	// Pintamos selector de zombies
 	backgroundSelector->draw();
-	backgroundContadorCerebros->draw(); 
 	botonZombieBasico->draw();
 	botonZombieRapido->draw();
 	botonZombieFuerte->draw(); 
-	botonPausa->draw();
-	textCerebros->draw();
 	textCosteZombieBasico->draw();
-	textCosteZombieRapido->draw(); 
-	textCosteZombieFuerte->draw(); 
+	textCosteZombieRapido->draw();
+	textCosteZombieFuerte->draw();
 
-	// Pintamos a los enemigos
+	// Pintamos botón de pausa
+	botonPausa->draw();
+
+	// Pintamos los enemigos
 	for (auto const& enemy : enemies) {
 		enemy->draw();
 	}
 
-	// Pintamos a los spawns de zombies
+	// Pintamos los spawns de zombies
 	for (auto const& plataforma : plataformas) {
 		plataforma->draw();
 	}
@@ -325,20 +340,20 @@ void GameLayer::processControls() {
 
 	// Se creara un zombie específico en función del zombie seleccionado
 	for (auto const& plataforma : plataformas) {
-		if (plataforma->clicked) {
-			if (clickedZombieBasico && cerebros >= costeZombieBasico) {
+		if (plataforma->clicked) { // Si se dio click a una plataforma
+			if (clickedZombieBasico && cerebros >= costeZombieBasico) { // Si se quiere un zombie básico
 				Zombie* zombie = new ZombieBasico(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
 				cerebros -= costeZombieBasico;
 				textCerebros->content = to_string(cerebros);
 			}
-			if (clickedZombieRapido && cerebros >= costeZombieRapido) {
+			if (clickedZombieRapido && cerebros >= costeZombieRapido) { // Si se quiere un zombie rápido
 				Zombie* zombie = new ZombieRapido(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
 				cerebros -= costeZombieRapido;
 				textCerebros->content = to_string(cerebros);
 			}
-			if (clickedZombieFuerte && cerebros >= costeZombieFuerte) {
+			if (clickedZombieFuerte && cerebros >= costeZombieFuerte) { // Si se quiere un zombie fuerte
 				Zombie* zombie = new ZombieFuerte(plataforma->x, plataforma->y - 20, game);
 				zombies.push_back(zombie);
 				cerebros -= costeZombieFuerte;
@@ -377,29 +392,29 @@ void GameLayer::mouseToControls(SDL_Event event) {
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
 		controlContinue = true;
 		controlPause = false;
-		if (botonZombieBasico->containsPoint(motionX, motionY)) {
+		if (botonZombieBasico->containsPoint(motionX, motionY)) { // Botón zombie básico activado
 			clickedZombieBasico = true; 
 			clickedZombieRapido = false; 
 			clickedZombieFuerte = false; 
 		}
 
-		if (botonZombieRapido->containsPoint(motionX, motionY)) {
+		if (botonZombieRapido->containsPoint(motionX, motionY)) { // Botón zombie rápido activado
 			clickedZombieRapido = true; 
 			clickedZombieBasico = false; 
 			clickedZombieFuerte = false;
 		}
 
-		if (botonZombieFuerte->containsPoint(motionX, motionY)) {
+		if (botonZombieFuerte->containsPoint(motionX, motionY)) { // Botón zombie fuerte activado
 			clickedZombieFuerte = true;
 			clickedZombieRapido = false;
 			clickedZombieBasico = false;
 		}
 
-		if (botonPausa->containsPoint(motionX, motionY)) {
+		if (botonPausa->containsPoint(motionX, motionY)) { // Botón pausa activado
 			controlPause = true;
 		}
 
-		for (auto const& plataforma : plataformas) {
+		for (auto const& plataforma : plataformas) { // Comprobamos si se activó alguna plataforma
 			if (plataforma->containsPoint(motionX, motionY)) {
 				plataforma->clicked = true; 
 			}
@@ -447,22 +462,22 @@ void GameLayer::loadMap(string name) {
 void GameLayer::loadMapObject(char character, float x, float y)
 {
 	switch (character) {
-	case 'G': {
+	case 'G': { // Gota
 		Enemy* enemie = new Gota(x, y, game);
 		enemies.push_back(enemie);
 		break;
 	}
-	case 'H': {
+	case 'H': { // Hielo
 		Enemy* enemie = new Hielo(x, y, game);
 		enemies.push_back(enemie);
 		break;
 	}
-	case 'N': {
+	case 'N': { // Nube
 		Enemy* enemie = new Nube(x, y, game);
 		enemies.push_back(enemie);
 		break;
 	}
-	case 'Z': {
+	case 'Z': { // Plataforma zombie
 		Actor* plataforma = new Actor("res/plataforma.png", x, y + 10, 32, 40, game); 
 		plataformas.push_back(plataforma);
 		break;

@@ -15,7 +15,7 @@ Animation::Animation(string filename, float actorWidth, float actorHeight,
 	this->updateFrecuence = updateFrecuence;
 	this->totalFrames = totalFrames;
 	this->game = game;
-	this->id = id; 
+	this->id = id; // El id nos permite identificar la animación de forma única
 
 	updateTime = 0; // última actualización
 	currentFrame = 0;
